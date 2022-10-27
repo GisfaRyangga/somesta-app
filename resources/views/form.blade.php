@@ -84,7 +84,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <button class="btn btn-primary w-100">Kirim</button>
+                <button class="btn btn-primary w-100">Kiri</button>
             </div>
         </form>
     </div>
