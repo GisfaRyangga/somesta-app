@@ -34,7 +34,7 @@
             <div class="mb-3">
                 <label for="kebutuhan" class="form-label fw-bold">Kebutuhan Perbulan</label>
                 <input type="number" id="kebutuhan" class="form-control" autocomplete="off" placeholder="Satuan KL">
-                <label class="form-text">Contoh: 200</label>
+                <label class="form-text">Contoh: 2000</label>
             </div>
             <div class="mb-3">
                 <label for="jenis_industri" class="form-label fw-bold">Jenis Industri</label>
