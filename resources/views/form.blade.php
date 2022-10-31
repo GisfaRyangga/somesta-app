@@ -6,7 +6,7 @@
     <h2 class="text-center mb-4">Customer Input</h2>
     <div class="offset-lg-2 col-lg-8 mb-5">
         <div class="alert alert-warning" role="alert">
-            [in development] data yang di submit, otomatis akan masuk ke DB bila ada internet.
+            [in development] data yang di submit, otomatis akan masuk ke DB bila ada internet. Form kosong = data tidak masuk
           </div>
         <form method="POST" action="{{ route('perusahaan.submitForm') }}">
             @csrf
@@ -66,7 +66,7 @@
                 <label class="form-text">Contoh: VHS/LOCO/FRANCO</label>
             </div>
                 <div class="mb-3 ">
-                    <button type="submit" class="btn btn-primary">Kirim</button>
+                    <button type="submit" onclick="return confirm('Yakin data sudah benar?')" class="btn btn-primary">Kirim</button>
                 </div>
         </form>
     </div>

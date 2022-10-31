@@ -184,16 +184,16 @@ class FirebaseController extends Controller
             ->set([
                 "nama" => $request->nama,
                 "group" => $request->group,
-                "status"=> $request->status,
-                "koor_latitude" => $splittedKoordinat[0],
-                "koor_longitude" => $splittedKoordinat[1],
-                "lokasi"=> $request->lokasi,
-                "kebutuhan"=> $request->kebutuhan,
-                "jenis"=> $request->jenis,
+                "status" => $request->status,
+                "koor_latitude" => floatval($splittedKoordinat[0]),
+                "koor_longitude" => floatval($splittedKoordinat[1]),
+                "lokasi" => $request->lokasi,
+                "kebutuhan" => $request->kebutuhan,
+                "jenis" => $request->jenis,
                 "tipe_customer" => $request->tipe_customer,
-                "dilayani"=> $request->dilayani,
-                "penyalur"=> $request->penyalur,
-                "pelayanan"=> $request->pelayanan,
+                "dilayani" => $request->dilayani,
+                "penyalur" => $request->penyalur,
+                "pelayanan" => $request->pelayanan,
             ]);
         }
         
@@ -203,16 +203,16 @@ class FirebaseController extends Controller
             ->set([
                 "nama" => $request->nama,
                 "group" => $request->group,
-                "status"=> $request->status,
-                "koor_latitude" => $splittedKoordinat[0],
-                "koor_longitude" => $splittedKoordinat[1],
-                "lokasi"=> $request->lokasi,
-                "kebutuhan"=> $request->kebutuhan,
-                "jenis"=> $request->jenis,
+                "status" => $request->status,
+                "koor_latitude" => floatval($splittedKoordinat[0]),
+                "koor_longitude" => floatval($splittedKoordinat[1]),
+                "lokasi" => $request->lokasi,
+                "kebutuhan" => $request->kebutuhan,
+                "jenis" => $request->jenis,
                 "tipe_customer" => $request->tipe_customer,
-                "dilayani"=> $request->dilayani,
-                "penyalur"=> $request->penyalur,
-                "pelayanan"=> $request->pelayanan,
+                "dilayani" => $request->dilayani,
+                "penyalur" => $request->penyalur,
+                "pelayanan" => $request->pelayanan,
             ]);
             dump($autoIncrementID);
         }
