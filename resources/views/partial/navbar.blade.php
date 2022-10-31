@@ -13,8 +13,8 @@
                     href="/form">Input Form</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "upload") ? 'active' : '' }}"
-                    href="/upload">Input CSV</a>
+                    <a class="nav-link {{ ($title === "uploadcsv") ? 'active' : '' }}"
+                    href="/uploadcsv">Input CSV</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "show") ? 'active' : '' }}"

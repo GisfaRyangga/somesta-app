@@ -164,34 +164,77 @@ class FirebaseController extends Controller
         dump($ref);
     }
 
-    public function set()
+    public function set(Request $request)
     {
         // before
         $ref = $this->database->getReference('dev')->getValue();
-        // dump($ref[1]);
+
+        //initiate auto increment function
+        $highest_id = 0;
+        foreach($ref as $nums=>$d){
+            $highest_id = $nums;
+        }
+        $autoIncrementID = $highest_id+1;
+
+        //split coords
+        $splittedKoordinat = explode(',',$request->koordinat);
 
         if ($ref == null) {
-            // $ref = $this->database->getReference('dev')->set([1 => ["name" => "namaperusahaan"]]);
-            dump("PASSED");
+            $ref = $this->database->getReference('dev/1')
+            ->set([
+                "nama" => $request->nama,
+                "group" => $request->group,
+                "status"=> $request->status,
+                "koor_latitude" => $splittedKoordinat[0],
+                "koor_longitude" => $splittedKoordinat[1],
+                "lokasi"=> $request->lokasi,
+                "kebutuhan"=> $request->kebutuhan,
+                "jenis"=> $request->jenis,
+                "tipe_customer" => $request->tipe_customer,
+                "dilayani"=> $request->dilayani,
+                "penyalur"=> $request->penyalur,
+                "pelayanan"=> $request->pelayanan,
+            ]);
         }
         
         else {
-            //initiate auto increment function
-            $highest_id = 0;
-            foreach($ref as $nums=>$d){
-                $highest_id = $nums;
-            }
-            $autoIncrementID = $highest_id+1;
+            
             $ref = $this->database->getReference('dev/'.$autoIncrementID)
             ->set([
-            "harimau" => "agassssssseererasadsdasderak"
+                "nama" => $request->nama,
+                "group" => $request->group,
+                "status"=> $request->status,
+                "koor_latitude" => $splittedKoordinat[0],
+                "koor_longitude" => $splittedKoordinat[1],
+                "lokasi"=> $request->lokasi,
+                "kebutuhan"=> $request->kebutuhan,
+                "jenis"=> $request->jenis,
+                "tipe_customer" => $request->tipe_customer,
+                "dilayani"=> $request->dilayani,
+                "penyalur"=> $request->penyalur,
+                "pelayanan"=> $request->pelayanan,
             ]);
             dump($autoIncrementID);
         }
+        dump([
+            "nama" => $request->nama,
+            "group" => $request->group,
+            "status"=> $request->status,
+            "koor_latitude" => $splittedKoordinat[0],
+            "koor_longitude" => $splittedKoordinat[1],
+            "lokasi"=> $request->lokasi,
+            "kebutuhan"=> $request->kebutuhan,
+            "jenis"=> $request->jenis,
+            "tipe_customer" => $request->tipe_customer,
+            "dilayani"=> $request->dilayani,
+            "penyalur"=> $request->penyalur,
+            "pelayanan"=> $request->pelayanan,
+        ]);
         
-        dump($ref);
-        $ref = $this->database->getReference('dev/3')->getValue();
-        dump($ref);
+        
+        // dump($ref);
+        // $ref = $this->database->getReference('dev/3')->getValue();
+        // dump($ref);
 
         // after
         // $ref = $this->database->getReference('dbCustomer/namaPerusahaan')->getValue();
