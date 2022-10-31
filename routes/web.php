@@ -53,7 +53,7 @@ Route::get('/show', [FirebaseController::class, 'read']);
 
 
 // firebase crud
-// Route::get('create', [FirebaseController::class, 'set']);
+Route::get('create', [FirebaseController::class, 'set']);
 Route::get('read', [FirebaseController::class, 'read']);
 // Route::get('update', [FirebaseController::class, 'update']);
 // Route::get('delete', [FirebaseController::class, 'delete']);

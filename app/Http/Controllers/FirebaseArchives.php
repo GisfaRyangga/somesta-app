@@ -28,4 +28,24 @@ class FirebaseArchives extends Controller //Arsip doang, tidak digunakan di apli
             dump($ref);
             // return view('show', ['title' => 'show'], compact('ref'));   
         }
+
+        public function set()
+    {
+        // before
+        $ref = $this->database->getReference('name')->getValue();
+        dump($ref);
+
+        // set data
+        $ref = $this->database->getReference('hewan/karnivora')
+        ->set([
+            "harimau" => [
+                "benggala" => "galak",
+                "sumatera" => "jinak"
+            ]
+        ]);
+
+        // after
+        $ref = $this->database->getReference('hewan')->getValue();
+        dump($ref);
+    }
 }

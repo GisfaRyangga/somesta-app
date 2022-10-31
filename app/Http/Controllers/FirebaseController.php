@@ -149,6 +149,8 @@ class FirebaseController extends Controller
 
     public function update()
     {
+        
+
         // before
         $ref = $this->database->getReference('tumbuhan/dikotil')->getValue();
         dump($ref);
@@ -165,21 +167,35 @@ class FirebaseController extends Controller
     public function set()
     {
         // before
-        $ref = $this->database->getReference('hewan')->getValue();
-        dump($ref);
+        $ref = $this->database->getReference('dev')->getValue();
+        // dump($ref[1]);
 
-        // set data
-        $ref = $this->database->getReference('hewan/karnivora')
-        ->set([
-            "harimau" => [
-                "benggala" => "galak",
-                "sumatera" => "jinak"
-            ]
-        ]);
+        if ($ref == null) {
+            // $ref = $this->database->getReference('dev')->set([1 => ["name" => "namaperusahaan"]]);
+            dump("PASSED");
+        }
+        
+        else {
+            //initiate auto increment function
+            $highest_id = 0;
+            foreach($ref as $nums=>$d){
+                $highest_id = $nums;
+            }
+            $autoIncrementID = $highest_id+1;
+            $ref = $this->database->getReference('dev/'.$autoIncrementID)
+            ->set([
+            "harimau" => "agassssssseererasadsdasderak"
+            ]);
+            dump($autoIncrementID);
+        }
+        
+        dump($ref);
+        $ref = $this->database->getReference('dev/3')->getValue();
+        dump($ref);
 
         // after
-        $ref = $this->database->getReference('hewan')->getValue();
-        dump($ref);
+        // $ref = $this->database->getReference('dbCustomer/namaPerusahaan')->getValue();
+        // dump($ref);
     }
     
     public function delete()
