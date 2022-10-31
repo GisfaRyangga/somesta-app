@@ -48,11 +48,12 @@ Route::get('/', [SomestaController::class, 'tampil_login']);
 Route::get('/register', [SomestaController::class, 'tampil_register']);
 Route::get('/form', [SomestaController::class, 'tampil_form']);
 Route::get('/upload', [SomestaController::class, 'tampil_csv']);
-Route::get('/show', [SomestaController::class, 'tampil_show']);
+// Route::get('/show', [SomestaController::class, 'tampil_show']);
+Route::get('/show', [FirebaseController::class, 'read']);
 
 
-// firebase crud tests
-Route::get('create', [FirebaseController::class, 'set']);
+// firebase crud
+// Route::get('create', [FirebaseController::class, 'set']);
 Route::get('read', [FirebaseController::class, 'read']);
-Route::get('update', [FirebaseController::class, 'update']);
-Route::get('delete', [FirebaseController::class, 'delete']);
+// Route::get('update', [FirebaseController::class, 'update']);
+// Route::get('delete', [FirebaseController::class, 'delete']);

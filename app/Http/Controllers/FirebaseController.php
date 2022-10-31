@@ -142,22 +142,9 @@ class FirebaseController extends Controller
 
     public function read()
     {
-        //originals from github repo
-        // $ref = $this->database->getReference('hewan/karnivora/harimau')->getSnapshot();
-        // dump($ref);
-        // $ref = $this->database->getReference('hewan/karnivora')->getValue();
-        // dump($ref);
-
-        //somesta develop
-        $ref = $this->database->getReference('dbCustomer')->getSnapshot();
-        dump($ref);
-        $ref = $this->database->getReference('dbCustomer/PT Lintang Abadi')->getValue();
-        dump($ref);
-        
-        // $ref = $this->database->getReference('hewan/karnivora')->getValue();
-        // dump($ref);
-        // $ref = $this->database->getReference('hewan/omnivora')->getSnapshot()->exists();
-        // dump($ref);
+        $ref = $this->database->getReference('dbCustomer/')->getValue();
+        $local_id = 1;
+        return view('show', ['title' => 'show'], compact('ref','local_id'));
     }
 
     public function update()

@@ -22,30 +22,36 @@
                 </tr>
             </thead>
             <tbody id="CustomerData">   
-                <tr>
-                    <td>1</td>
-                    <td>PT Lintang Abadi</td>
-                    <td>grup1</td>
-                    <td>status3</td>
-                    <td>-7.782299547448744, 110.36725032244684</td>
-                    <td>Jawa Timur</td>
-                    <td>12000</td>
-                    <td>Perkebunan Kelapa Sawit</td>
-                    <td>Kontrak</td>
-                    <td>Exxon</td>
-                    <td>Distribution Division</td>
-                    <td>VHS</td>
-                    <td>
-                        <form>
-                            @csrf
-                            <button class="btn-primary">Edit</button>
-                          </form>
-                          <form>
-                            @csrf
-                            <button class="btn-danger" onclick="return confirm('Yakin mau dihapus?')">Hapus</button>
-                          </form>
-                    </td>
-                </tr>
+                    @foreach ($ref as $data=>$d)
+                        <tr>
+                            <td>{{ $local_id }}</td>
+                            <td>{{ $d['nama'         ] }}</td>
+                            <td>{{ $d['group'        ] }}</td>
+                            <td>{{ $d['status'       ] }}</td>
+                            <td>{{ $d['koor_latitude'] }}</td>
+                            <td>{{ $d['lokasi'       ] }}</td>
+                            <td>{{ $d['kebutuhan'    ] }}</td>
+                            <td>{{ $d['jenis'        ] }}</td>
+                            <td>{{ $d['tipe_customer'] }}</td>
+                            <td>{{ $d['dilayani'     ] }}</td>
+                            <td>{{ $d['penyalur'     ] }}</td>
+                            <td>{{ $d['pelayanan'    ] }}</td>
+                            @php
+                                $local_id++
+                            @endphp
+
+                            <td>
+                            <form action="" method="">
+                                @csrf
+                                <button class="btn-primary" onclick="return confirm('in development. Come back later!')">Edit</button>
+                            </form>
+                            <form action="" method="">
+                                @csrf
+                                <button class="btn-danger" onclick="return confirm('in development. Come back later!')">Hapus</button>
+                            </form>
+                            </td>
+                        </tr>
+                    @endforeach
             </tbody>
         </table>
     </div>
