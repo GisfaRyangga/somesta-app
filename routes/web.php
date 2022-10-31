@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FirebaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SomestaController;
 /*
@@ -48,3 +49,10 @@ Route::get('/register', [SomestaController::class, 'tampil_register']);
 Route::get('/form', [SomestaController::class, 'tampil_form']);
 Route::get('/upload', [SomestaController::class, 'tampil_csv']);
 Route::get('/show', [SomestaController::class, 'tampil_show']);
+
+
+// firebase crud tests
+Route::get('create', [FirebaseController::class, 'set']);
+Route::get('read', [FirebaseController::class, 'read']);
+Route::get('update', [FirebaseController::class, 'update']);
+Route::get('delete', [FirebaseController::class, 'delete']);
