@@ -45,7 +45,7 @@ use App\Http\Controllers\SomestaController;
 // });
 
 Route::get('/', [SomestaController::class, 'tampil_login']);
-Route::get('/register', [SomestaController::class, 'tampil_register']);
+Route::get('/add_admin', [SomestaController::class, 'tampil_register']);
 Route::get('/form', [SomestaController::class, 'tampil_form']);
 Route::get('/uploadcsv', [SomestaController::class, 'tampil_csv']);
 // Route::get('/show', [SomestaController::class, 'tampil_show']);

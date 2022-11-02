@@ -18,7 +18,7 @@
                     <th>Disupply oleh</th>
                     <th>Penyalur</th>
                     <th>Pelayanan</th>
-                    <th >Aksi</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody id="CustomerData">   
