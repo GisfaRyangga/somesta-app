@@ -3,6 +3,9 @@
 @section('form')
 
 <div class="container mt-4">
+    @if (Session::has('pesan'))
+        <div class="alert alert-success">{{Session::get('pesan')}}</div>
+    @endif
     <h2 class="text-center mb-4">Customer Input</h2>
     <div class="offset-lg-2 col-lg-8 mb-5">
         <div class="alert alert-warning" role="alert">

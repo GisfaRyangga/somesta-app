@@ -23,34 +23,38 @@
             </thead>
             <tbody id="CustomerData">   
                     @foreach ($ref as $data=>$d)
-                        <tr>
-                            <td>{{ $local_id }}</td>
-                            <td>{{ $d['nama'         ] }}</td>
-                            <td>{{ $d['group'        ] }}</td>
-                            <td>{{ $d['status'       ] }}</td>
-                            <td>{{ $d['koor_latitude'] }}</td>
-                            <td>{{ $d['lokasi'       ] }}</td>
-                            <td>{{ $d['kebutuhan'    ] }}</td>
-                            <td>{{ $d['jenis'        ] }}</td>
-                            <td>{{ $d['tipe_customer'] }}</td>
-                            <td>{{ $d['dilayani'     ] }}</td>
-                            <td>{{ $d['penyalur'     ] }}</td>
-                            <td>{{ $d['pelayanan'    ] }}</td>
-                            @php
-                                $local_id++
-                            @endphp
+                    @if ($data == null)
+                        
+                    @else
+                    <tr>
+                        <td>{{ $local_id }}</td>
+                        <td>{{ $d['nama'         ] }}</td>
+                        <td>{{ $d['group'        ] }}</td>
+                        <td>{{ $d['status'       ] }}</td>
+                        <td>{{ $d['koor_latitude'] }}</td>
+                        <td>{{ $d['lokasi'       ] }}</td>
+                        <td>{{ $d['kebutuhan'    ] }}</td>
+                        <td>{{ $d['jenis'        ] }}</td>
+                        <td>{{ $d['tipe_customer'] }}</td>
+                        <td>{{ $d['dilayani'     ] }}</td>
+                        <td>{{ $d['penyalur'     ] }}</td>
+                        <td>{{ $d['pelayanan'    ] }}</td>
+                        @php
+                            $local_id++
+                        @endphp
 
-                            <td>
-                            <form action="" method="">
-                                @csrf
-                                <button class="btn-primary" onclick="return confirm('in development. Come back later!')">Edit</button>
-                            </form>
-                            <form action="" method="">
-                                @csrf
-                                <button class="btn-danger" onclick="return confirm('in development. Come back later!')">Hapus</button>
-                            </form>
-                            </td>
-                        </tr>
+                        <td>
+                        <form action="" method="">
+                            @csrf
+                            <button class="btn-primary" onclick="return confirm('in development. Come back later!')">Edit</button>
+                        </form>
+                        <form action="" method="">
+                            @csrf
+                            <button class="btn-danger" onclick="return confirm('in development. Come back later!')">Hapus</button>
+                        </form>
+                        </td>
+                    </tr>
+                    @endif
                     @endforeach
             </tbody>
         </table>

@@ -167,7 +167,7 @@ class FirebaseController extends Controller
     public function set(Request $request)
     {
         // before
-        $ref = $this->database->getReference('dev')->getValue();
+        $ref = $this->database->getReference('dbCustomer')->getValue();
 
         //initiate auto increment function
         $highest_id = 0;
@@ -180,7 +180,7 @@ class FirebaseController extends Controller
         $splittedKoordinat = explode(',',$request->koordinat);
 
         if ($ref == null) {
-            $ref = $this->database->getReference('dev/1')
+            $ref = $this->database->getReference('dbCustomer/1')
             ->set([
                 "nama" => $request->nama,
                 "group" => $request->group,
@@ -199,7 +199,7 @@ class FirebaseController extends Controller
         
         else {
             
-            $ref = $this->database->getReference('dev/'.$autoIncrementID)
+            $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
             ->set([
                 "nama" => $request->nama,
                 "group" => $request->group,
@@ -214,22 +214,24 @@ class FirebaseController extends Controller
                 "penyalur" => $request->penyalur,
                 "pelayanan" => $request->pelayanan,
             ]);
-            dump($autoIncrementID);
+            // dump($autoIncrementID);
         }
-        dump([
-            "nama" => $request->nama,
-            "group" => $request->group,
-            "status"=> $request->status,
-            "koor_latitude" => $splittedKoordinat[0],
-            "koor_longitude" => $splittedKoordinat[1],
-            "lokasi"=> $request->lokasi,
-            "kebutuhan"=> $request->kebutuhan,
-            "jenis"=> $request->jenis,
-            "tipe_customer" => $request->tipe_customer,
-            "dilayani"=> $request->dilayani,
-            "penyalur"=> $request->penyalur,
-            "pelayanan"=> $request->pelayanan,
-        ]);
+        // dump([
+        //     "nama" => $request->nama,
+        //     "group" => $request->group,
+        //     "status"=> $request->status,
+        //     "koor_latitude" => $splittedKoordinat[0],
+        //     "koor_longitude" => $splittedKoordinat[1],
+        //     "lokasi"=> $request->lokasi,
+        //     "kebutuhan"=> $request->kebutuhan,
+        //     "jenis"=> $request->jenis,
+        //     "tipe_customer" => $request->tipe_customer,
+        //     "dilayani"=> $request->dilayani,
+        //     "penyalur"=> $request->penyalur,
+        //     "pelayanan"=> $request->pelayanan,
+        // ]);
+
+        return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
         
         
         // dump($ref);
