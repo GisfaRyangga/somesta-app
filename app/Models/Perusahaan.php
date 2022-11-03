@@ -9,4 +9,5 @@ class Perusahaan extends Model
 {
     // use HasFactory;
     protected $table = 'Perusahaan';
+    protected $fillable = ['nama', 'group', 'status', 'koor_latitude', 'lokasi', 'kebutuhan', 'jenis', 'tipe_customer', 'dilayani', 'penyalur', 'pelayanan'];
 }

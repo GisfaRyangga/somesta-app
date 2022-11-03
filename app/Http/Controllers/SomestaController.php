@@ -35,4 +35,10 @@ class SomestaController extends Controller
             'title' => 'show'
         ]);
     }
+
+    public function tampil_edit(){
+        return view('edit', [
+            'title' => 'show'
+        ]);
+    }
 }

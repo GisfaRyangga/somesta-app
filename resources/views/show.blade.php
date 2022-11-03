@@ -1,8 +1,9 @@
 @extends('layout/main')
 
 @section('form')
-<div class="container mt-5 d-flex justify-content-center">
+<div class="container mt-4 d-flex justify-content-center">
     <div class="row w-100">
+    <h2 class="text-center mb-4 fw-bold">ALL CUSTOMER</h2>
         <table class="table table-bordered">
             <thead>
                 <tr class="align-middle">
@@ -44,7 +45,7 @@
                         @endphp
 
                         <td>
-                        <form action="" method="">
+                        <form action="/edit" method="get">
                             @csrf
                             <button class="btn-primary" onclick="return confirm('in development. Come back later!')">Edit</button>
                         </form>

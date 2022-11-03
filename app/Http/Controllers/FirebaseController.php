@@ -8,6 +8,7 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth;
 use Firebase\Auth\Token\Exception\InvalidToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
+use App\Models\Perusahaan;
 
 class FirebaseController extends Controller
 {
