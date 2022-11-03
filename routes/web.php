@@ -48,7 +48,10 @@ Route::get('/', [SomestaController::class, 'tampil_login']);
 Route::get('/add_admin', [SomestaController::class, 'tampil_register']);
 Route::get('/form', [SomestaController::class, 'tampil_form']);
 Route::get('/uploadcsv', [SomestaController::class, 'tampil_csv']);
-Route::get('/edit', [SomestaController::class, 'tampil_edit']);
+
+Route::get('/edit/{id}', [FirebaseController::class, 'edit'])->name('edit.perusahaan');
+Route::post('/edit/{id}/update', [FirebaseController::class, 'updateThisPerusahaan'])->name('update.perusahaan');
+
 // Route::get('/show', [SomestaController::class, 'tampil_show']);
 Route::get('/show', [FirebaseController::class, 'read']);
 

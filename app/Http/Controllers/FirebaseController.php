@@ -165,6 +165,35 @@ class FirebaseController extends Controller
         dump($ref);
     }
 
+    public function edit($data){
+        $ref = $this->database->getReference('dbCustomer/'.$data)->getValue();
+        $data_id = $data;
+        $ref_longitude =  $this->database->getReference('dbCustomer/'.$data."/koor_longitude")->getValue();
+        $ref_latitude =  $this->database->getReference('dbCustomer/'.$data."/koor_latitude")->getValue();
+        $ref_combined_coords = $ref_latitude.", ".$ref_longitude;
+        return view('edit',['title' => 'edit'],compact('ref','ref_combined_coords','data_id'));
+    }
+
+    public function updateThisPerusahaan(Request $request, $id){
+        $splittedKoordinat = explode(',',$request->koordinat);
+        $ref = $this->database->getReference('dbCustomer/'.$id)
+            ->set([
+                "nama" => $request->nama,
+                "group" => $request->group,
+                "status" => $request->status,
+                "koor_latitude" => floatval($splittedKoordinat[0]),
+                "koor_longitude" => floatval($splittedKoordinat[1]),
+                "lokasi" => $request->lokasi,
+                "kebutuhan" => $request->kebutuhan,
+                "jenis" => $request->jenis,
+                "tipe_customer" => $request->tipe_customer,
+                "dilayani" => $request->dilayani,
+                "penyalur" => $request->penyalur,
+                "pelayanan" => $request->pelayanan,
+            ]);
+        return redirect('/show')->with('pesan','Data User Berhasil di Edit');
+    }
+
     public function set(Request $request)
     {
         // before

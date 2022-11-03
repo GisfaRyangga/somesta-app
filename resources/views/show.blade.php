@@ -29,6 +29,7 @@
                     @else
                     <tr>
                         <td>{{ $local_id }}</td>
+                        
                         <td>{{ $d['nama'         ] }}</td>
                         <td>{{ $d['group'        ] }}</td>
                         <td>{{ $d['status'       ] }}</td>
@@ -45,9 +46,9 @@
                         @endphp
 
                         <td>
-                        <form action="/edit" method="get">
+                        <form action="{{ route('edit.perusahaan',$data) }}" method="get">
                             @csrf
-                            <button class="btn-primary" onclick="return confirm('in development. Come back later!')">Edit</button>
+                            <button class="btn-primary">Edit</button>
                         </form>
                         <form action="" method="">
                             @csrf
