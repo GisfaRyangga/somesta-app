@@ -3,6 +3,9 @@
 @section('form')
 <div class="container mt-4 d-flex justify-content-center">
     <div class="row w-100">
+    @if (Session::has('pesan'))
+        <div class="alert alert-success">{{Session::get('pesan')}}</div>
+    @endif
     <h2 class="text-center mb-4 fw-bold">ALL CUSTOMER</h2>
         <table class="table table-bordered">
             <thead>
@@ -50,9 +53,9 @@
                             @csrf
                             <button class="btn-primary">Edit</button>
                         </form>
-                        <form action="" method="">
+                        <form action="{{ route('delete.perusahaan',$data) }}" method="get">
                             @csrf
-                            <button class="btn-danger" onclick="return confirm('in development. Come back later!')">Hapus</button>
+                            <button class="btn-danger" onclick="return confirm('Yakin menghapus perusahaan ini?')">Hapus</button>
                         </form>
                         </td>
                     </tr>

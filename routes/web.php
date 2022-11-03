@@ -58,6 +58,8 @@ Route::get('/show', [FirebaseController::class, 'read']);
 //form route
 Route::post('/submitForm', [FirebaseController::class, 'set'])->name('perusahaan.submitForm');
 
+Route::get('/delete/{id}', [FirebaseController::class, 'delete'])->name('delete.perusahaan');
+
 // firebase crud
 // Route::get('create', [FirebaseController::class, 'set']);
 Route::get('read', [FirebaseController::class, 'read']);

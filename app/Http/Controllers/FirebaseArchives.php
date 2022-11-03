@@ -48,4 +48,32 @@ class FirebaseArchives extends Controller //Arsip doang, tidak digunakan di apli
         $ref = $this->database->getReference('hewan')->getValue();
         dump($ref);
     }
+
+    public function delete()
+    {
+        // before
+        $ref = $this->database->getReference('hewan/karnivora/harimau')->getValue();
+        dump($ref);
+
+        /**
+         * 1. remove()
+         * 2. set(null)
+         * 3. update(["key" => null])
+         */
+
+        // remove()
+        $ref = $this->database->getReference('hewan/karnivora/harimau/benggala')->remove();
+
+        // set(null)
+        $ref = $this->database->getReference('hewan/karnivora/harimau/benggala')
+            ->set(null);
+
+        // update(["key" => null])
+        $ref = $this->database->getReference('hewan/karnivora/harimau')
+            ->update(["benggala" => null]);
+
+        // after
+        $ref = $this->database->getReference('hewan/karnivora/harimau')->getValue();
+        dump($ref);
+    }
 }

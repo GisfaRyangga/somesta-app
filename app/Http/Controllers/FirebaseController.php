@@ -191,7 +191,7 @@ class FirebaseController extends Controller
                 "penyalur" => $request->penyalur,
                 "pelayanan" => $request->pelayanan,
             ]);
-        return redirect('/show')->with('pesan','Data User Berhasil di Edit');
+        return redirect('/show')->with('pesan','Data user berhasil diperbarui');
     }
 
     public function set(Request $request)
@@ -273,11 +273,10 @@ class FirebaseController extends Controller
         // dump($ref);
     }
     
-    public function delete()
+    public function delete($id)
     {
         // before
-        $ref = $this->database->getReference('hewan/karnivora/harimau')->getValue();
-        dump($ref);
+        $ref = $this->database->getReference('dbCustomer/'.$id)->getValue();
 
         /**
          * 1. remove()
@@ -286,19 +285,16 @@ class FirebaseController extends Controller
          */
 
         // remove()
-        $ref = $this->database->getReference('hewan/karnivora/harimau/benggala')->remove();
+        $ref = $this->database->getReference('dbCustomer/'.$id)->remove();
 
         // set(null)
-        $ref = $this->database->getReference('hewan/karnivora/harimau/benggala')
+        $ref = $this->database->getReference('dbCustomer/'.$id)
             ->set(null);
 
         // update(["key" => null])
-        $ref = $this->database->getReference('hewan/karnivora/harimau')
-            ->update(["benggala" => null]);
-
-        // after
-        $ref = $this->database->getReference('hewan/karnivora/harimau')->getValue();
-        dump($ref);
+        // $ref = $this->database->getReference('hewan/karnivora/harimau')
+        //     ->update(["benggala" => null]);
+        return redirect('/show')->with('pesan','Data user berhasil dihapus');
     }
         
 }
