@@ -1,8 +1,9 @@
 @extends('layout/main')
 
 @section('form')
-<div class="container mt-4 d-flex justify-content-center">
-    <div class="row w-100">
+
+<div class="container mt-4 d-flex">
+    <div class="row w-100 justify-content-center">
     @if (Session::has('pesan'))
         <div class="alert alert-success">{{Session::get('pesan')}}</div>
     @endif
@@ -51,11 +52,11 @@
                         <td>
                         <form action="{{ route('edit.perusahaan',$data) }}" method="get">
                             @csrf
-                            <button class="btn-primary">Edit</button>
+                            <button class="btn-primary w-100">Edit</button>
                         </form>
                         <form action="{{ route('delete.perusahaan',$data) }}" method="get">
                             @csrf
-                            <button class="btn-danger" onclick="return confirm('Yakin menghapus perusahaan ini?')">Hapus</button>
+                            <button class="btn-danger w-100" onclick="return confirm('Yakin menghapus perusahaan ini?')">Hapus</button>
                         </form>
                         </td>
                     </tr>

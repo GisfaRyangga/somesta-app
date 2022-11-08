@@ -14,7 +14,7 @@ class SomestaController extends Controller
 
     public function tampil_csv(){
         return view('upload', [
-            'title' => 'upload'
+            'title' => 'uploadcsv'
         ]);
     }
 
@@ -36,9 +36,9 @@ class SomestaController extends Controller
         ]);
     }
 
-    public function tampil_edit(){
-        return view('edit', [
-            'title' => 'show'
-        ]);
-    }
+    // public function tampil_edit(){
+    //     return view('edit', [
+    //         'title' => 'show'
+    //     ]);
+    // }
 }

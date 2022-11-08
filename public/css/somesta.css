@@ -1,0 +1,64 @@
+body {
+    font-family: 'Montserrat';
+}
+
+.navbar-brand{
+    font-weight:550 ;
+}
+
+input[type=text] {
+    border: 1px solid #3E85E9
+}
+
+input[type=number] {
+    border: 1px solid #3E85E9
+}
+
+input[type=email] {
+    border: 1px solid #3E85E9
+}
+
+input[type=password] {
+    border: 1px solid #3E85E9
+}
+
+input[type=radio] {
+    border: 1px solid #3E85E9
+}
+
+input[type=checkbox] {
+    border: 1px solid #3E85E9
+}
+
+input[type=file] {
+    border: 1px solid #ADC52D;
+    color: #ADC52D;
+}
+
+.btn {
+    background-color: #DF2230;
+    border: 1px solid #DF2230;
+}
+
+.tengah {
+    margin: auto;
+}
+
+h2{
+    color: #DF2230;
+}
+
+table{
+    overflow-y: auto;
+}
+
+.middle{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.table-bordered{
+    border: #868686;
+}

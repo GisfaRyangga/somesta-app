@@ -7,7 +7,7 @@
         <div class="alert alert-success">{{Session::get('pesan')}}</div>
     @endif
     <h2 class="text-center mb-4 fw-bold">CUSTOMER INPUT</h2>
-    <div class="offset-lg-2 col-lg-8 mb-5">
+    <div class="col-lg-5 mb-5 tengah">
         <div class="alert alert-warning" role="alert">
             [in development] data yang di submit, otomatis akan masuk ke DB bila ada internet. Form kosong = data tidak masuk
           </div>
@@ -68,9 +68,9 @@
                 <input type="text" name="pelayanan" class="form-control" autocomplete="off">
                 <label class="form-text">Contoh: VHS/LOCO/FRANCO</label>
             </div>
-                <div class="mb-3 ">
-                    <button type="submit" onclick="return confirm('Yakin data sudah benar?')" class="btn btn-primary">Kirim</button>
-                </div>
+            <div class="mb-3 ">
+                <button type="submit" onclick="return confirm('Yakin data sudah benar?')" class="btn btn-primary w-100 mt-3 fw-bold">Kirim</button>
+            </div>
         </form>
     </div>
 </div>

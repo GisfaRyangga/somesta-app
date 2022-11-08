@@ -141,17 +141,13 @@ class FirebaseController extends Controller
         // return $response;
     }
 
-    public function read()
-    {
+    public function read(){
         $ref = $this->database->getReference('dbCustomer/')->getValue();
         $local_id = 1;
         return view('show', ['title' => 'show'], compact('ref','local_id'));
     }
 
-    public function update()
-    {
-        
-
+    public function update(){
         // before
         $ref = $this->database->getReference('tumbuhan/dikotil')->getValue();
         dump($ref);
@@ -171,7 +167,7 @@ class FirebaseController extends Controller
         $ref_longitude =  $this->database->getReference('dbCustomer/'.$data."/koor_longitude")->getValue();
         $ref_latitude =  $this->database->getReference('dbCustomer/'.$data."/koor_latitude")->getValue();
         $ref_combined_coords = $ref_latitude.", ".$ref_longitude;
-        return view('edit',['title' => 'edit'],compact('ref','ref_combined_coords','data_id'));
+        return view('edit', ['title' => 'show'], compact('ref','ref_combined_coords','data_id'));
     }
 
     public function updateThisPerusahaan(Request $request, $id){

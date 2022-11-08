@@ -16,12 +16,12 @@
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
         crossorigin="anonymous">
-    
+        <link rel="stylesheet" type="text/css" href="css/somesta.css">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <title>Somesta Form</title>
 
     </head>
     <body id="home" >
-
         @include('partial/navbar')
             <div class="container-fluid text-dark" >
                 @yield('form')

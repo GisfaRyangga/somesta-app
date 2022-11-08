@@ -1,40 +1,55 @@
-@extends('layout/main')
+{{-- @extends('layout/main') --}}
 
-@section('form')
+{{-- @section('form') --}}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Bootstrap CSS -->
+        {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+        crossorigin="anonymous"> --}}
 
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:bold" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+        crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/somesta.css">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <title>Somesta Login</title>
+
+    </head>
     <body id="log_in">
-
-        <div class="container mt-4">
+        <div class="container middle">
             <h2 class="text-center mb-4 fw-bold">LOGIN CMS SOMESTA</h2>
-            <div class="offset-lg-2 col-lg-8">
+            <div class="col-lg-5 tengah">
             <form class="needs-validation" action="/form">
-                    <div class="form-group was-validated mb-3">
-                        <label class="form-label" for="username">Username</label>
-                        <input class="form-control" type="text" id="username" required>
+                    <div class="form-group mb-3">
+                        <label class="form-label fw-bold" for="username">Username</label>
+                        <input class="form-control" type="text" id="username" name="username" required>
                         <div class="invalid-feedback">
                             Please enter your username
                         </div>
                     </div>
-
-                    <div class="form-group was-validated mb-3">
-                        <label class="form-label" for="password">Password</label>
-                        <input class="form-control" type="password" id="password" required>
+                    <div class="form-group mb-3">
+                        <label class="form-label fw-bold" for="password">Password</label>
+                        <input class="form-control" type="password" id="password" name="password" required>
                         <div class="invalid-feedback">
                             Please enter your password
                         </div>
                     </div>
-
                     <div class="form-group form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="check">
                         <label class="form-check-label" for="check">Remember me</label>
                     </div>
 
-                    <div class="row mb-0">
-                        <div class="col-md-8">
-                            <button type="submit" class="btn btn-primary">
-                                Login
-                            </button>
-                        </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary w-100 mt-3 fw-bold">Login</button>
                     </div>
                 </form>
             </div>
@@ -45,4 +60,4 @@
         crossorigin="anonymous"></script>
     </body>
 
-@endsection
+{{-- @endsection --}}
