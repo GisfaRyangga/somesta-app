@@ -14,11 +14,11 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "uploadcsv") ? 'active' : '' }}"
-                    href="/uploadcsv">Input CSV</a>
+                    href="/uploadcsv">Upload CSV</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "show") ? 'active' : '' }}"
-                    href="/show">Show Data</a>
+                    href="/show">Show Customer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "register") ? 'active' : '' }}"

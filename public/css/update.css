@@ -62,11 +62,3 @@ table{
 .table-bordered{
     border: #868686;
 }
-
-.tombol {
-    border-radius: 7px;
-}
-
-.kecil {
-    font-size: 14px;
-}

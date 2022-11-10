@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" href="css/somesta.css">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <title>Somesta Form</title>
+        @yield('style_update')
 
     </head>
     <body id="home" >
