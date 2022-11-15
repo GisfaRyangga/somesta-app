@@ -70,7 +70,7 @@
                 <label class="form-text">Contoh: VHS/LOCO/FRANCO</label>
             </div>
             <div class="mb-3">
-                <button type="submit" onclick="return confirm('Yakin data sudah benar?')" class="btn btn-primary fw-bold w-100">Update</button>
+                <button type="submit" onclick="return confirm('Yakin data sudah benar?')" class="btn btn-primary w-100 mt-3 fw-bold">Update</button>
             </div>
         </form>
     </div>

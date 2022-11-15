@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-primary w-100 mt-3 fw-bold">Add</button>
+                    <button class="btn btnmerah btn-primary w-100 mt-3 fw-bold">Add</button>
                 </div>
             </form>
         </div>

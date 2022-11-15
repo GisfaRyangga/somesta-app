@@ -10,7 +10,7 @@
     <h2 class="text-center mb-4 fw-bold">ALL CUSTOMER</h2>
         <table class="table table-bordered kecil">
             <thead>
-                <tr class="align-middle text-center">
+                <tr class="align-middle text-center ">
                     <th>No</th>
                     <th>Nama Perusahaan</th>
                     <th>Group</th>
@@ -51,11 +51,11 @@
                         <td>
                         <form action="{{ route('edit.perusahaan',$data) }}" method="get">
                             @csrf
-                            <button class="btn-primary w-100 mb-1 tombol">Edit</button>
+                            <button class="btn-primary w-100 mb-1 btn-aksi">Edit</button>
                         </form>
                         <form action="{{ route('delete.perusahaan',$data) }}" method="get">
                             @csrf
-                            <button class="btn-danger w-100 tombol" onclick="return confirm('Yakin menghapus perusahaan ini?')">Hapus</button>
+                            <button class="btn-danger w-100 btn-aksi" onclick="return confirm('Yakin menghapus perusahaan ini?')">Hapus</button>
                         </form>
                         </td>
                     </tr>

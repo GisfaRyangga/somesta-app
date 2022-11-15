@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white fixed-top sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-navbar text-white fixed-top sticky-top">
     <div class="container">
         <a class="navbar-brand" href="/">SOMESTA</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

@@ -1,0 +1,4 @@
+Nama Perusahaan,Group,Status,Koordinat,"Wilayah Kabupaten, Provinsi",Kebutuhan perbulan,Jenis Industri,Tipe Customer,Disupply oleh,Penyalur,Pelayanan
+PT Real,laliga,status3,-6.23200932,madrid,55000,perusahaan,customer baik,pertamina1,Pertamina Mining Division,Pertamina Spanyol
+pt bayern,bundesliga,status4,-6.23200932,munich,100000,perusahaan,customer baik,pertamina1,Pertamina Mining Division,Pertamina Jerman
+pt mcity,premier,status5,-6.23200932,manchester,75000,perusahaan,customer baik,pertamina1,Pertamina Mining Division,Pertamina Inggris

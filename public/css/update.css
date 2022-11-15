@@ -2,42 +2,54 @@ body {
     font-family: 'Montserrat';
 }
 
+.bg-navbar{
+    background-color: #101410;
+}
+
 .navbar-brand{
-    font-weight:550 ;
+    font-weight:550;
 }
 
 input[type=text] {
-    border: 1px solid #3E85E9
+    border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 input[type=number] {
-    border: 1px solid #3E85E9
+    border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 input[type=email] {
-    border: 1px solid #3E85E9
+    border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 input[type=password] {
-    border: 1px solid #3E85E9
+    border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 input[type=radio] {
-    border: 1px solid #3E85E9
+    border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 input[type=checkbox] {
-    border: 1px solid #3E85E9
+    border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 input[type=file] {
     border: 1px solid #ADC52D;
     color: #ADC52D;
+    border-radius: 7px;
 }
 
 .btn {
     background-color: #DF2230;
     border: 1px solid #DF2230;
+    border-radius: 7px;
 }
 
 .tengah {
