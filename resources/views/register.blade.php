@@ -3,9 +3,15 @@
 @section('form')
 
 <div class="container mt-4">
+    
         <h2 class="text-center mb-4 fw-bold">ADD NEW ADMIN</h2>
         <div class="col-lg-5 tengah">
-            <form class="needs-validation" action="/form">
+            @if (Session::has('pesan'))
+                <div class="alert alert-success">{{Session::get('pesan')}}</div>
+            @endif
+            <div class="alert alert-warning">Admin yang di add akan masuk di Firebase RealtimeDatabase dan Firebase Authentication</div>
+            <form class="needs-validation" method="POST" action="{{ route('register_admin') }}">
+                @csrf
                 <div class="row mb-3">
                     <div class="col">
                         <label class="form-label fw-bold" for="firstname">First name</label>
@@ -54,7 +60,7 @@
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <label class="form-label fw-bold" for="gender">Admin Type</label>
+                    <label class="form-label fw-bold" for="admin_type">Admin Type</label>
                     <div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="super_admin" value="super_admin"/>

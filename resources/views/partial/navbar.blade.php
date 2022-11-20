@@ -22,7 +22,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "register") ? 'active' : '' }}"
-                    href="/add_admin">Add Admin</a>
+                    href="/register_form">Add Admin</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "logout") ? 'active' : '' }}"

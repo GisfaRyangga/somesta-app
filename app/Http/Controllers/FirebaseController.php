@@ -27,7 +27,7 @@ class FirebaseController extends Controller
     public function signUp()
     {
         $email = "angelicdemon@gmail.com";
-        $pass = "anya123";
+        $pass = "coba";
 
         try {
             $newUser = $this->auth->createUserWithEmailAndPassword($email, $pass);
@@ -45,6 +45,10 @@ class FirebaseController extends Controller
                     break;
             }
         }
+    }
+
+    public function about(){
+        return view('about', ['title' => 'about']);
     }
 
     public function signIn()
@@ -92,24 +96,24 @@ class FirebaseController extends Controller
 
     public function userCheck()
     {
-        $idToken = "";
+        // $idToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC1mYnMtYmYwZTciLCJhdWQiOiJwcm9qZWN0LWZicy1iZjBlNyIsImF1dGhfdGltZSI6MTY2ODk0ODU2NSwidXNlcl9pZCI6Ik5FS2JSN0N5Q2hoS3htTEtjUGlRRVhmMmpiMDIiLCJzdWIiOiJORUtiUjdDeUNoaEt4bUxLY1BpUUVYZjJqYjAyIiwiaWF0IjoxNjY4OTQ4NTY1LCJleHAiOjE2Njg5NTIxNjUsImVtYWlsIjoiYW5nZWxpY2RlbW9uQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhbmdlbGljZGVtb25AZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.eTpZxjKiEkGr9LuBhjJ_EKAubZcqJj0rS8kZ9YJlshEQHcB_17ejiJH99GakR_U055CMy-r4YoymA5gon8MZPYTTE5sVDNju7Xc7eteH2p1zPVYshFnTQr97iRmC-zXcqf8ff5n7LFaN00zP4k32At_bfHgCb7YUbqWipb1TNc-yw8AXuVAMOKimkDb-tYBnpksCEagiDOn-4b52ZjT1vRWKCU_9LCNNdcAIBFb2qZj-mJmggNCckl1VBz1Dz_SDmDKwz5v7GuuY1Tp1P9vqNp7V9brl2XrskGBoQ-KfehJYdQ2PCS71Fa7_6vv-FRV1j7o06hQMeI4CuRC8oGJ7Lw";
 
         // $this->auth->revokeRefreshTokens("");
 
-        // if (Session::has('firebaseUserId') && Session::has('idToken')) {
-        //     dd("User masih login.");
-        // } else {
-        //     dd("User sudah logout.");
-        // }
-
-        try {
-            $verifiedIdToken = $this->auth->verifyIdToken($idToken, $checkIfRevoked = true);
-            dump($verifiedIdToken);
-            dump($verifiedIdToken->claims()->get('sub')); // uid
-            dump($this->auth->getUser($verifiedIdToken->claims()->get('sub')));
-        } catch (\Throwable $e) {
-            dd($e->getMessage());
+        if (Session::has('firebaseUserId') && Session::has('idToken')) {
+            dd("User masih login.");
+        } else {
+            dd("User sudah logout.");
         }
+
+        // try {
+        //     $verifiedIdToken = $this->auth->verifyIdToken($idToken, $checkIfRevoked = true);
+        //     dump($verifiedIdToken);
+        //     dump($verifiedIdToken->claims()->get('sub')); // uid
+        //     dump($this->auth->getUser($verifiedIdToken->claims()->get('sub')));
+        // } catch (\Throwable $e) {
+        //     dd($e->getMessage());
+        // }
 
         // try {
         //     $verifiedIdToken = $this->auth->verifyIdToken(Session::get('idToken'), $checkIfRevoked = true);
@@ -221,6 +225,7 @@ class FirebaseController extends Controller
                 "penyalur" => $request->penyalur,
                 "pelayanan" => $request->pelayanan,
             ]);
+            
         }
         
         else {
@@ -267,6 +272,81 @@ class FirebaseController extends Controller
         // after
         // $ref = $this->database->getReference('dbCustomer/namaPerusahaan')->getValue();
         // dump($ref);
+    }
+
+    public function addAdmin(Request $request)
+    {
+        dump("REGISTER FUNCTION");
+        // before
+        $ref = $this->database->getReference('dbAdmin')->getValue();
+
+        //initiate auto increment function
+        $highest_id = 0;
+        foreach($ref as $nums=>$d){
+            $highest_id = $nums;
+        }
+        $autoIncrementID = $highest_id+1;
+
+        $fullName = $request->firstname." ".$request->lastname;
+
+        if ($ref == null) {
+            $ref = $this->database->getReference('dbAdmin/1')
+            ->set([
+                "fullName" => $fullName,
+                "username" => $request->username,
+                "email" => $request->email,
+                "password" => $request->password,
+                "admin_type" => $request->admin_type,
+            ]);
+
+            $email = $request->email;
+            $pass = $request->password;
+            try {
+                $this->auth->createUserWithEmailAndPassword($email, $pass);
+            } catch (\Throwable $e) {
+                switch ($e->getMessage()) {
+                    case 'The email address is already in use by another account.':
+                        dd("Email sudah digunakan.");
+                        break;
+                    case 'A password must be a string with at least 6 characters.':
+                        dd("Kata sandi minimal 6 karakter.");
+                        break;
+                    default:
+                        dd($e->getMessage());
+                        break;
+                }
+            }
+        }
+        
+        else {
+            $ref = $this->database->getReference('dbAdmin/'.$autoIncrementID)
+            ->set([
+                "fullName" => $fullName,
+                "username" => $request->username,
+                "email" => $request->email,
+                "password" => $request->password,
+                "admin_type" => $request->admin_type,
+            ]);
+
+            $email = $request->email;
+            $pass = $request->password;
+            try {
+                $this->auth->createUserWithEmailAndPassword($email, $pass);
+            } catch (\Throwable $e) {
+                switch ($e->getMessage()) {
+                    case 'The email address is already in use by another account.':
+                        dd("Email sudah digunakan.");
+                        break;
+                    case 'A password must be a string with at least 6 characters.':
+                        dd("Kata sandi minimal 6 karakter.");
+                        break;
+                    default:
+                        dd($e->getMessage());
+                        break;
+                }
+            }
+        }
+        return redirect('/add_admin')->with('pesan','Admin Berhasil ditambahkan');
     }
     
     public function delete($id)

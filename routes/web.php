@@ -45,7 +45,7 @@ use App\Http\Controllers\SomestaController;
 // });
 
 Route::get('/', [SomestaController::class, 'tampil_login']);
-Route::get('/add_admin', [SomestaController::class, 'tampil_register']);
+Route::get('/register_form', [SomestaController::class, 'tampil_register']);
 Route::get('/form', [SomestaController::class, 'tampil_form']);
 Route::get('/uploadcsv', [SomestaController::class, 'tampil_csv']);
 
@@ -60,8 +60,18 @@ Route::post('/submitForm', [FirebaseController::class, 'set'])->name('perusahaan
 
 Route::get('/delete/{id}', [FirebaseController::class, 'delete'])->name('delete.perusahaan');
 
+//register admin submission
+Route::post('/addAdmin', [FirebaseController::class, 'addAdmin'])->name('register_admin');
+
 // firebase crud
 // Route::get('create', [FirebaseController::class, 'set']);
 Route::get('read', [FirebaseController::class, 'read']);
 // Route::get('update', [FirebaseController::class, 'update']);
 // Route::get('delete', [FirebaseController::class, 'delete']);
+
+// Login Register Routes
+Route::get('/register', [FirebaseController::class, 'signUp']);
+Route::get('/login', [FirebaseController::class, 'signIn']);
+Route::get('/logout', [FirebaseController::class, 'signOut']);
+Route::get('/check', [FirebaseController::class, 'userCheck']);
+Route::get('/about', [FirebaseController::class, 'about']);
