@@ -6,6 +6,11 @@
     @if (Session::has('pesan'))
         <div class="alert alert-success">{{Session::get('pesan')}}</div>
     @endif
+    @if (Session::has('access_violation'))
+        @php
+            echo "<script type='text/javascript'>alert('Anda tidak memiliki hak akses fitur ini');</script>";
+        @endphp
+    @endif
     <h2 class="text-center mb-4 fw-bold">CUSTOMER INPUT</h2>
     <div class="col-lg-5 mb-5 tengah">
         <div class="alert alert-warning" role="alert">

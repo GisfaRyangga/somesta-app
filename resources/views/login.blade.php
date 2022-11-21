@@ -28,7 +28,8 @@
         <div class="container middle">
             <h2 class="text-center mb-4 fw-bold">LOGIN CMS SOMESTA</h2>
             <div class="col-lg-5 tengah">
-            <div class="alert alert-success">email / pass: <b>andhika@andhika.com</b> / <b>123123123</b></div>
+            <div class="alert alert-success">SUPERADMIN email / pass: <b>super@super.com</b> / <b>123123123</b></div>
+            <div class="alert alert-success">ADMIN email / pass: <b>noob@noob.com</b> / <b>123123123</b></div>
             <form class="needs-validation" method="POST" action="{{ route('login.submit') }}">
                 @csrf
                     <div class="form-group mb-3">

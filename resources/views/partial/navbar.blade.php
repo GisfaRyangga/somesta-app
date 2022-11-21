@@ -20,10 +20,14 @@
                     <a class="nav-link {{ ($title === "show") ? 'active' : '' }}"
                     href="/show">Show Customer</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ ($title === "register") ? 'active' : '' }}"
-                    href="/register_form">Add Admin</a>
-                </li>
+                @if (Session::get('thisUserRole') == 'super_admin')
+                    <li class="nav-item">
+                        <a class="nav-link {{ ($title === "register") ? 'active' : '' }}"
+                        href="/register_form">Add Admin</a>
+                    </li>
+                @else
+                    
+                @endif
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "About") ? 'active' : '' }}"
                     href="/about">About</a>

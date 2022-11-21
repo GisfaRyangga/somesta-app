@@ -9,6 +9,7 @@ use Kreait\Firebase\Auth;
 use Firebase\Auth\Token\Exception\InvalidToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use App\Models\Perusahaan;
+use App\Models\User;
 
 use function JmesPath\search;
 
@@ -50,7 +51,11 @@ class FirebaseController extends Controller
     }
 
     public function about(){
-        return view('about', ['title' => 'about']);
+        if ($this->userCheck() == true){
+            return view('about', ['title' => 'about']);
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
     }
 
     public function signIn(Request $request)
@@ -132,11 +137,12 @@ class FirebaseController extends Controller
         // $idToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4MDljZmYxMTZlNWJhNzQwNzQ1YmZlZGE1OGUxNmU4MmYzZmQ4MDUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHJvamVjdC1mYnMtYmYwZTciLCJhdWQiOiJwcm9qZWN0LWZicy1iZjBlNyIsImF1dGhfdGltZSI6MTY2ODk0ODU2NSwidXNlcl9pZCI6Ik5FS2JSN0N5Q2hoS3htTEtjUGlRRVhmMmpiMDIiLCJzdWIiOiJORUtiUjdDeUNoaEt4bUxLY1BpUUVYZjJqYjAyIiwiaWF0IjoxNjY4OTQ4NTY1LCJleHAiOjE2Njg5NTIxNjUsImVtYWlsIjoiYW5nZWxpY2RlbW9uQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhbmdlbGljZGVtb25AZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.eTpZxjKiEkGr9LuBhjJ_EKAubZcqJj0rS8kZ9YJlshEQHcB_17ejiJH99GakR_U055CMy-r4YoymA5gon8MZPYTTE5sVDNju7Xc7eteH2p1zPVYshFnTQr97iRmC-zXcqf8ff5n7LFaN00zP4k32At_bfHgCb7YUbqWipb1TNc-yw8AXuVAMOKimkDb-tYBnpksCEagiDOn-4b52ZjT1vRWKCU_9LCNNdcAIBFb2qZj-mJmggNCckl1VBz1Dz_SDmDKwz5v7GuuY1Tp1P9vqNp7V9brl2XrskGBoQ-KfehJYdQ2PCS71Fa7_6vv-FRV1j7o06hQMeI4CuRC8oGJ7Lw";
 
         // $this->auth->revokeRefreshTokens("");
-
         if (Session::has('firebaseUserId') && Session::has('idToken')) {
-            dd("User masih login.");
+            // dd("User masih login.");
+            return true;
         } else {
-            dd("User sudah logout.");
+            // dd("User sudah logout.");
+            return false;
         }
 
         // try {
@@ -179,237 +185,265 @@ class FirebaseController extends Controller
     }
 
     public function read(){
-        $ref = $this->database->getReference('dbCustomer/')->getValue();
-        $local_id = 1;
-        return view('show', ['title' => 'show'], compact('ref','local_id'));
+        if ($this->userCheck() == true){
+            $ref = $this->database->getReference('dbCustomer/')->getValue();
+            $local_id = 1;
+            return view('show', ['title' => 'show'], compact('ref','local_id'));
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
     }
 
     public function update(){
-        // before
-        $ref = $this->database->getReference('tumbuhan/dikotil')->getValue();
-        dump($ref);
+        
+        if ($this->userCheck() == true){
+            // before
+            $ref = $this->database->getReference('tumbuhan/dikotil')->getValue();
+            dump($ref);
 
-        // update data
-        $ref = $this->database->getReference('tumbuhan')
-        ->update(["dikotil" => "mangga"]);
+            // update data
+            $ref = $this->database->getReference('tumbuhan')
+            ->update(["dikotil" => "mangga"]);
 
-        // after
-        $ref = $this->database->getReference('tumbuhan/dikotil')->getValue();
-        dump($ref);
+            // after
+            $ref = $this->database->getReference('tumbuhan/dikotil')->getValue();
+            dump($ref);
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
     }
 
     public function edit($data){
-        $ref = $this->database->getReference('dbCustomer/'.$data)->getValue();
-        $data_id = $data;
-        $ref_longitude =  $this->database->getReference('dbCustomer/'.$data."/koor_longitude")->getValue();
-        $ref_latitude =  $this->database->getReference('dbCustomer/'.$data."/koor_latitude")->getValue();
-        $ref_combined_coords = $ref_latitude.", ".$ref_longitude;
-        return view('edit', ['title' => 'show'], compact('ref','ref_combined_coords','data_id'));
+        if ($this->userCheck() == true){
+            $ref = $this->database->getReference('dbCustomer/'.$data)->getValue();
+            $data_id = $data;
+            $ref_longitude =  $this->database->getReference('dbCustomer/'.$data."/koor_longitude")->getValue();
+            $ref_latitude =  $this->database->getReference('dbCustomer/'.$data."/koor_latitude")->getValue();
+            $ref_combined_coords = $ref_latitude.", ".$ref_longitude;
+            return view('edit', ['title' => 'show'], compact('ref','ref_combined_coords','data_id'));
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
     }
 
     public function updateThisPerusahaan(Request $request, $id){
-        $splittedKoordinat = explode(',',$request->koordinat);
-        $ref = $this->database->getReference('dbCustomer/'.$id)
-            ->set([
-                "nama" => $request->nama,
-                "group" => $request->group,
-                "status" => $request->status,
-                "koor_latitude" => floatval($splittedKoordinat[0]),
-                "koor_longitude" => floatval($splittedKoordinat[1]),
-                "lokasi" => $request->lokasi,
-                "kebutuhan" => $request->kebutuhan,
-                "jenis" => $request->jenis,
-                "tipe_customer" => $request->tipe_customer,
-                "dilayani" => $request->dilayani,
-                "penyalur" => $request->penyalur,
-                "pelayanan" => $request->pelayanan,
-            ]);
-        return redirect('/show')->with('pesan','Data user berhasil diperbarui');
+        if ($this->userCheck() == true){
+            $splittedKoordinat = explode(',',$request->koordinat);
+            $ref = $this->database->getReference('dbCustomer/'.$id)
+                ->set([
+                    "nama" => $request->nama,
+                    "group" => $request->group,
+                    "status" => $request->status,
+                    "koor_latitude" => floatval($splittedKoordinat[0]),
+                    "koor_longitude" => floatval($splittedKoordinat[1]),
+                    "lokasi" => $request->lokasi,
+                    "kebutuhan" => $request->kebutuhan,
+                    "jenis" => $request->jenis,
+                    "tipe_customer" => $request->tipe_customer,
+                    "dilayani" => $request->dilayani,
+                    "penyalur" => $request->penyalur,
+                    "pelayanan" => $request->pelayanan,
+                ]);
+            return redirect('/show')->with('pesan','Data user berhasil diperbarui');
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
     }
 
     public function set(Request $request)
     {
-        // before
-        $ref = $this->database->getReference('dbCustomer')->getValue();
+        if ($this->userCheck() == true){
+            // before
+            $ref = $this->database->getReference('dbCustomer')->getValue();
 
-        //initiate auto increment function
-        $highest_id = 0;
-        foreach($ref as $nums=>$d){
-            $highest_id = $nums;
-        }
-        $autoIncrementID = $highest_id+1;
+            //initiate auto increment function
+            $highest_id = 0;
+            foreach($ref as $nums=>$d){
+                $highest_id = $nums;
+            }
+            $autoIncrementID = $highest_id+1;
 
-        //split coords
-        $splittedKoordinat = explode(',',$request->koordinat);
+            //split coords
+            $splittedKoordinat = explode(',',$request->koordinat);
 
-        if ($ref == null) {
-            $ref = $this->database->getReference('dbCustomer/1')
-            ->set([
-                "nama" => $request->nama,
-                "group" => $request->group,
-                "status" => $request->status,
-                "koor_latitude" => floatval($splittedKoordinat[0]),
-                "koor_longitude" => floatval($splittedKoordinat[1]),
-                "lokasi" => $request->lokasi,
-                "kebutuhan" => $request->kebutuhan,
-                "jenis" => $request->jenis,
-                "tipe_customer" => $request->tipe_customer,
-                "dilayani" => $request->dilayani,
-                "penyalur" => $request->penyalur,
-                "pelayanan" => $request->pelayanan,
-            ]);
+            if ($ref == null) {
+                $ref = $this->database->getReference('dbCustomer/1')
+                ->set([
+                    "nama" => $request->nama,
+                    "group" => $request->group,
+                    "status" => $request->status,
+                    "koor_latitude" => floatval($splittedKoordinat[0]),
+                    "koor_longitude" => floatval($splittedKoordinat[1]),
+                    "lokasi" => $request->lokasi,
+                    "kebutuhan" => $request->kebutuhan,
+                    "jenis" => $request->jenis,
+                    "tipe_customer" => $request->tipe_customer,
+                    "dilayani" => $request->dilayani,
+                    "penyalur" => $request->penyalur,
+                    "pelayanan" => $request->pelayanan,
+                ]);
+            }
             
-        }
-        
-        else {
+            else {
+                
+                $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
+                ->set([
+                    "nama" => $request->nama,
+                    "group" => $request->group,
+                    "status" => $request->status,
+                    "koor_latitude" => floatval($splittedKoordinat[0]),
+                    "koor_longitude" => floatval($splittedKoordinat[1]),
+                    "lokasi" => $request->lokasi,
+                    "kebutuhan" => $request->kebutuhan,
+                    "jenis" => $request->jenis,
+                    "tipe_customer" => $request->tipe_customer,
+                    "dilayani" => $request->dilayani,
+                    "penyalur" => $request->penyalur,
+                    "pelayanan" => $request->pelayanan,
+                ]);
+                // dump($autoIncrementID);
+            }
+            // dump([
+            //     "nama" => $request->nama,
+            //     "group" => $request->group,
+            //     "status"=> $request->status,
+            //     "koor_latitude" => $splittedKoordinat[0],
+            //     "koor_longitude" => $splittedKoordinat[1],
+            //     "lokasi"=> $request->lokasi,
+            //     "kebutuhan"=> $request->kebutuhan,
+            //     "jenis"=> $request->jenis,
+            //     "tipe_customer" => $request->tipe_customer,
+            //     "dilayani"=> $request->dilayani,
+            //     "penyalur"=> $request->penyalur,
+            //     "pelayanan"=> $request->pelayanan,
+            // ]);
+
+            return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             
-            $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
-            ->set([
-                "nama" => $request->nama,
-                "group" => $request->group,
-                "status" => $request->status,
-                "koor_latitude" => floatval($splittedKoordinat[0]),
-                "koor_longitude" => floatval($splittedKoordinat[1]),
-                "lokasi" => $request->lokasi,
-                "kebutuhan" => $request->kebutuhan,
-                "jenis" => $request->jenis,
-                "tipe_customer" => $request->tipe_customer,
-                "dilayani" => $request->dilayani,
-                "penyalur" => $request->penyalur,
-                "pelayanan" => $request->pelayanan,
-            ]);
-            // dump($autoIncrementID);
+            
+            // dump($ref);
+            // $ref = $this->database->getReference('dev/3')->getValue();
+            // dump($ref);
+
+            // after
+            // $ref = $this->database->getReference('dbCustomer/namaPerusahaan')->getValue();
+            // dump($ref);
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
         }
-        // dump([
-        //     "nama" => $request->nama,
-        //     "group" => $request->group,
-        //     "status"=> $request->status,
-        //     "koor_latitude" => $splittedKoordinat[0],
-        //     "koor_longitude" => $splittedKoordinat[1],
-        //     "lokasi"=> $request->lokasi,
-        //     "kebutuhan"=> $request->kebutuhan,
-        //     "jenis"=> $request->jenis,
-        //     "tipe_customer" => $request->tipe_customer,
-        //     "dilayani"=> $request->dilayani,
-        //     "penyalur"=> $request->penyalur,
-        //     "pelayanan"=> $request->pelayanan,
-        // ]);
-
-        return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
-        
-        
-        // dump($ref);
-        // $ref = $this->database->getReference('dev/3')->getValue();
-        // dump($ref);
-
-        // after
-        // $ref = $this->database->getReference('dbCustomer/namaPerusahaan')->getValue();
-        // dump($ref);
     }
 
     public function addAdmin(Request $request)
     {
-        // before
-        $ref = $this->database->getReference('dbAdmin')->getValue();
+        if ($this->userCheck() == true){
+            // before
+            $ref = $this->database->getReference('dbAdmin')->getValue();
 
-        //initiate auto increment function
-        $highest_id = 0;
-        foreach($ref as $nums=>$d){
-            $highest_id = $nums;
-        }
-        $autoIncrementID = $highest_id+1;
+            //initiate auto increment function
+            $highest_id = 0;
+            foreach($ref as $nums=>$d){
+                $highest_id = $nums;
+            }
+            $autoIncrementID = $highest_id+1;
 
-        $fullName = $request->firstname." ".$request->lastname;
+            $fullName = $request->firstname." ".$request->lastname;
 
 
-        if ($ref == null) {
-            $ref = $this->database->getReference('dbAdmin/1')
-            ->set([
-                "fullName" => $fullName,
-                // "username" => $request->username,
-                "email" => $request->email,
-                "password" => $request->password,
-                "admin_type" => $request->admin_type,
-            ]);
+            if ($ref == null) {
+                $ref = $this->database->getReference('dbAdmin/1')
+                ->set([
+                    "fullName" => $fullName,
+                    // "username" => $request->username,
+                    "email" => $request->email,
+                    "password" => $request->password,
+                    "admin_type" => $request->admin_type,
+                ]);
 
-            $email = $request->email;
-            $pass = $request->password;
-            try {
-                $this->auth->createUserWithEmailAndPassword($email, $pass);
-            } catch (\Throwable $e) {
-                switch ($e->getMessage()) {
-                    case 'The email address is already in use by another account.':
-                        // dd("Email sudah digunakan.");
-                        return redirect('/register_form')->with('register-error','Email sudah digunakan.');
-                        break;
-                    case 'A password must be a string with at least 6 characters.':
-                        // dd("Kata sandi minimal 6 karakter.");
-                        return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
-                        break;
-                    default:
-                        // dd($e->getMessage());
-                        return redirect('/register_form')->with('register-error',$e->getMessage());
-                        break;
+                $email = $request->email;
+                $pass = $request->password;
+                try {
+                    $this->auth->createUserWithEmailAndPassword($email, $pass);
+                } catch (\Throwable $e) {
+                    switch ($e->getMessage()) {
+                        case 'The email address is already in use by another account.':
+                            // dd("Email sudah digunakan.");
+                            return redirect('/register_form')->with('register-error','Email sudah digunakan.');
+                            break;
+                        case 'A password must be a string with at least 6 characters.':
+                            // dd("Kata sandi minimal 6 karakter.");
+                            return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
+                            break;
+                        default:
+                            // dd($e->getMessage());
+                            return redirect('/register_form')->with('register-error',$e->getMessage());
+                            break;
+                    }
                 }
             }
-        }
-        
-        else {
-            $ref = $this->database->getReference('dbAdmin/'.$autoIncrementID)
-            ->set([
-                "fullName" => $fullName,
-                // "username" => $request->username,
-                "email" => $request->email,
-                "password" => $request->password,
-                "admin_type" => $request->admin_type,
-            ]);
+            
+            else {
+                $ref = $this->database->getReference('dbAdmin/'.$autoIncrementID)
+                ->set([
+                    "fullName" => $fullName,
+                    // "username" => $request->username,
+                    "email" => $request->email,
+                    "password" => $request->password,
+                    "admin_type" => $request->admin_type,
+                ]);
 
-            $email = $request->email;
-            $pass = $request->password;
-            try {
-                $this->auth->createUserWithEmailAndPassword($email, $pass);
-            } catch (\Throwable $e) {
-                switch ($e->getMessage()) {
-                    case 'The email address is already in use by another account.':
-                        // dd("Email sudah digunakan.");
-                        return redirect('/register_form')->with('register-error','Email sudah digunakan.');
-                        break;
-                    case 'A password must be a string with at least 6 characters.':
-                        // dd("Kata sandi minimal 6 karakter.");
-                        return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
-                        break;
-                    default:
-                        // dd($e->getMessage());
-                        return redirect('/register_form')->with('register-error',$e->getMessage());
-                        break;
+                $email = $request->email;
+                $pass = $request->password;
+                try {
+                    $this->auth->createUserWithEmailAndPassword($email, $pass);
+                } catch (\Throwable $e) {
+                    switch ($e->getMessage()) {
+                        case 'The email address is already in use by another account.':
+                            // dd("Email sudah digunakan.");
+                            return redirect('/register_form')->with('register-error','Email sudah digunakan.');
+                            break;
+                        case 'A password must be a string with at least 6 characters.':
+                            // dd("Kata sandi minimal 6 karakter.");
+                            return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
+                            break;
+                        default:
+                            // dd($e->getMessage());
+                            return redirect('/register_form')->with('register-error',$e->getMessage());
+                            break;
+                    }
                 }
             }
+            return redirect('/register_form')->with('pesan','Admin Berhasil ditambahkan');
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
         }
-        return redirect('/register_form')->with('pesan','Admin Berhasil ditambahkan');
     }
     
     public function delete($id)
     {
-        // before
-        $ref = $this->database->getReference('dbCustomer/'.$id)->getValue();
+        if ($this->userCheck() == true){
+            // before
+            $ref = $this->database->getReference('dbCustomer/'.$id)->getValue();
 
-        /**
-         * 1. remove()
-         * 2. set(null)
-         * 3. update(["key" => null])
-         */
+            /**
+             * 1. remove()
+             * 2. set(null)
+             * 3. update(["key" => null])
+             */
 
-        // remove()
-        $ref = $this->database->getReference('dbCustomer/'.$id)->remove();
+            // remove()
+            $ref = $this->database->getReference('dbCustomer/'.$id)->remove();
 
-        // set(null)
-        $ref = $this->database->getReference('dbCustomer/'.$id)
-            ->set(null);
+            // set(null)
+            $ref = $this->database->getReference('dbCustomer/'.$id)
+                ->set(null);
 
-        // update(["key" => null])
-        // $ref = $this->database->getReference('hewan/karnivora/harimau')
-        //     ->update(["benggala" => null]);
-        return redirect('/show')->with('pesan','Data user berhasil dihapus');
+            // update(["key" => null])
+            // $ref = $this->database->getReference('hewan/karnivora/harimau')
+            //     ->update(["benggala" => null]);
+            return redirect('/show')->with('pesan','Data user berhasil dihapus');
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
     }
         
 }
