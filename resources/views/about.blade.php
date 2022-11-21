@@ -8,5 +8,7 @@
         <p>{{ Session::get('firebaseUserId'); }}</p>
         <h2>idToken:</h2>
         <p>{{ Session::get('idToken'); }}</p>
+        <h2>role:</h2>
+        <p>{{ Session::get('thisUserRole'); }}</p>
     </div>
 @endsection

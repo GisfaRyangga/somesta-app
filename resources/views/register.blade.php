@@ -9,6 +9,8 @@
             @if (Session::has('pesan'))
                 <div class="alert alert-success">{{Session::get('pesan')}}</div>
             @endif
+            
+            <div class="alert alert-warning">USERNAME SEMENTARA DISABLED KARENA ALASAN UX</div>
             <div class="alert alert-warning">Admin yang di add akan masuk di Firebase RealtimeDatabase dan Firebase Authentication</div>
             <form class="needs-validation" method="POST" action="{{ route('register_admin') }}">
                 @csrf
@@ -28,13 +30,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group mb-3">
+                {{-- <div class="form-group mb-3">
                     <label class="form-label fw-bold" for="username">Username</label>
                     <input class="form-control" type="text" id="username" name="username" required>
                     <div class="invalid-feedback">
                         Please enter your username
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group mb-3">
                     <label class="form-label fw-bold" for="email">Email</label>
                     <input class="form-control @error('email') is-invalid @enderror" type="email" id="email" name="email" required>
@@ -63,15 +65,18 @@
                     <label class="form-label fw-bold" for="admin_type">Admin Type</label>
                     <div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="super_admin" value="super_admin"/>
-                            <label class="form-check-label" for="super_admin">Super Admin</label>
+                            <input class="form-check-input" type="radio" name="admin_type" id="super_admin" value="super_admin"/>
+                            <label class="form-check-label" for="admin_type">Super Admin</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="admin" value="admin"/>
-                            <label class="form-check-label" for="admin">Admin</label>
+                            <input class="form-check-input" type="radio" name="admin_type" id="admin" value="admin"/>
+                            <label class="form-check-label" for="admin_type">Admin</label>
                         </div>
                     </div>
                 </div>
+                @if (Session::has('register-error'))
+                    <div class="alert alert-danger">{{Session::get('register-error')}}</div>
+                @endif
                 <div class="mb-3">
                     <button class="btn btnmerah btn-primary w-100 mt-3 fw-bold">Add</button>
                 </div>

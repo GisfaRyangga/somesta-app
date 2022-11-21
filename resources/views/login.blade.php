@@ -28,7 +28,9 @@
         <div class="container middle">
             <h2 class="text-center mb-4 fw-bold">LOGIN CMS SOMESTA</h2>
             <div class="col-lg-5 tengah">
-            <form class="needs-validation" action="/form">
+            <div class="alert alert-success">email / pass: <b>andhika@andhika.com</b> / <b>123123123</b></div>
+            <form class="needs-validation" method="POST" action="{{ route('login.submit') }}">
+                @csrf
                     <div class="form-group mb-3">
                         <label class="form-label fw-bold" for="username">Username</label>
                         <input class="form-control" type="text" id="username" name="username" required>
@@ -47,7 +49,9 @@
                         <input class="form-check-input" type="checkbox" id="check">
                         <label class="form-check-label" for="check">Remember me</label>
                     </div>
-
+                    @if (Session::has('login-error'))
+                        <div class="alert alert-danger">{{Session::get('login-error')}}</div>
+                    @endif
                     <div class="mb-3">
                         <button class="btn btnmerah btn-primary w-100 mt-3 fw-bold">Login</button>
                     </div>

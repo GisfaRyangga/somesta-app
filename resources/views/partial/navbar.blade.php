@@ -25,8 +25,12 @@
                     href="/register_form">Add Admin</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ ($title === "About") ? 'active' : '' }}"
+                    href="/about">About</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ ($title === "logout") ? 'active' : '' }}"
-                    href="/">Logout</a>
+                    href="/logout">Logout</a>
                 </li>
             </ul>
         </div>

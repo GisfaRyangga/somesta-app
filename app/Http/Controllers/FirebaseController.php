@@ -10,6 +10,8 @@ use Firebase\Auth\Token\Exception\InvalidToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use App\Models\Perusahaan;
 
+use function JmesPath\search;
+
 class FirebaseController extends Controller
 {
     protected $auth, $database;
@@ -51,30 +53,57 @@ class FirebaseController extends Controller
         return view('about', ['title' => 'about']);
     }
 
-    public function signIn()
+    public function signIn(Request $request)
     {
-        $email = "angelicdemon@gmail.com";
-        $pass = "anya123";
+        $email = $request->username;
+        $pass = $request->password;
 
         try {
             $signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
             // dump($signInResult->data());
 
+            // before
+            $ref = $this->database->getReference('dbAdmin')->getValue();
+            foreach($ref as $admin_id=>$data){
+                // $highest_id = $nums;
+                foreach($data as $current_admin=>$creds){
+                    // $highest_id = $nums;
+                    if($current_admin == "email"){
+                        if ($creds == $email){
+                            if (array_search('super_admin',$data,true) == true){
+                                $this_user_role = "super_admin";
+                                Session::put('thisUserRole', $this_user_role);
+                            }elseif(array_search('admin',$data,true) == true){
+                                $this_user_role = "admin";
+                                Session::put('thisUserRole', $this_user_role);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
             Session::put('firebaseUserId', $signInResult->firebaseUserId());
             Session::put('idToken', $signInResult->idToken());
+            Session::put('email', $email);
             Session::save();
 
-            dd($signInResult);
+            // dump($signInResult);
+            // dump($email);
+
+            // dd($signInResult);
+            return redirect('/about');
         } catch (\Throwable $e) {
             switch ($e->getMessage()) {
                 case 'INVALID_PASSWORD':
-                    dd("Kata sandi salah!.");
+                    // dd("Kata sandi salah!.");
+                    return redirect('/login')->with('login-error','Username/password salah');
                     break;
                 case 'EMAIL_NOT_FOUND':
-                    dd("Email tidak ditemukan.");
+                    return redirect('/login')->with('login-error','Username/password salah');
                     break;
                 default:
-                    dd($e->getMessage());
+                    // dd($e->getMessage());
+                    return redirect('/login')->with('login-error',$e->getMessage());
                     break;
             }
         }
@@ -87,10 +116,14 @@ class FirebaseController extends Controller
             $this->auth->revokeRefreshTokens(Session::get('firebaseUserId'));
             Session::forget('firebaseUserId');
             Session::forget('idToken');
+            Session::forget('email');
+            Session::forget('thisUserRole');
             Session::save();
-            dd("User berhasil logout.");
+            // dd("User berhasil logout.");
+            return redirect('/login')->with('login-error','Anda telah logout.');
         } else {
-            dd("User belum login.");
+            // dd("User belum login.");
+            return redirect('/login')->with('login-error','Anda belum login.');
         }
     }
 
@@ -276,7 +309,6 @@ class FirebaseController extends Controller
 
     public function addAdmin(Request $request)
     {
-        dump("REGISTER FUNCTION");
         // before
         $ref = $this->database->getReference('dbAdmin')->getValue();
 
@@ -289,11 +321,12 @@ class FirebaseController extends Controller
 
         $fullName = $request->firstname." ".$request->lastname;
 
+
         if ($ref == null) {
             $ref = $this->database->getReference('dbAdmin/1')
             ->set([
                 "fullName" => $fullName,
-                "username" => $request->username,
+                // "username" => $request->username,
                 "email" => $request->email,
                 "password" => $request->password,
                 "admin_type" => $request->admin_type,
@@ -306,13 +339,16 @@ class FirebaseController extends Controller
             } catch (\Throwable $e) {
                 switch ($e->getMessage()) {
                     case 'The email address is already in use by another account.':
-                        dd("Email sudah digunakan.");
+                        // dd("Email sudah digunakan.");
+                        return redirect('/register_form')->with('register-error','Email sudah digunakan.');
                         break;
                     case 'A password must be a string with at least 6 characters.':
-                        dd("Kata sandi minimal 6 karakter.");
+                        // dd("Kata sandi minimal 6 karakter.");
+                        return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
                         break;
                     default:
-                        dd($e->getMessage());
+                        // dd($e->getMessage());
+                        return redirect('/register_form')->with('register-error',$e->getMessage());
                         break;
                 }
             }
@@ -322,7 +358,7 @@ class FirebaseController extends Controller
             $ref = $this->database->getReference('dbAdmin/'.$autoIncrementID)
             ->set([
                 "fullName" => $fullName,
-                "username" => $request->username,
+                // "username" => $request->username,
                 "email" => $request->email,
                 "password" => $request->password,
                 "admin_type" => $request->admin_type,
@@ -335,18 +371,21 @@ class FirebaseController extends Controller
             } catch (\Throwable $e) {
                 switch ($e->getMessage()) {
                     case 'The email address is already in use by another account.':
-                        dd("Email sudah digunakan.");
+                        // dd("Email sudah digunakan.");
+                        return redirect('/register_form')->with('register-error','Email sudah digunakan.');
                         break;
                     case 'A password must be a string with at least 6 characters.':
-                        dd("Kata sandi minimal 6 karakter.");
+                        // dd("Kata sandi minimal 6 karakter.");
+                        return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
                         break;
                     default:
-                        dd($e->getMessage());
+                        // dd($e->getMessage());
+                        return redirect('/register_form')->with('register-error',$e->getMessage());
                         break;
                 }
             }
         }
-        return redirect('/add_admin')->with('pesan','Admin Berhasil ditambahkan');
+        return redirect('/register_form')->with('pesan','Admin Berhasil ditambahkan');
     }
     
     public function delete($id)
