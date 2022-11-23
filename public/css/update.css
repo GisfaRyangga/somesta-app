@@ -1,13 +1,9 @@
 body {
-    font-family: 'Montserrat';
+    font-family: 'Roboto';
 }
 
 .bg-navbar{
     background-color: #101410;
-}
-
-.navbar-brand{
-    font-weight:550;
 }
 
 input[type=text] {
@@ -30,26 +26,19 @@ input[type=password] {
     border-radius: 7px;
 }
 
-input[type=radio] {
-    border: 1px solid #3E85E9;
-    border-radius: 7px;
-}
-
-input[type=checkbox] {
-    border: 1px solid #3E85E9;
-    border-radius: 7px;
-}
-
-input[type=file] {
-    border: 1px solid #ADC52D;
-    color: #ADC52D;
-    border-radius: 7px;
-}
-
 .btn {
-    background-color: #DF2230;
-    border: 1px solid #DF2230;
-    border-radius: 7px;
+    background-color: #3E85E9;
+    border: 1px solid #3E85E9;
+}
+
+.btn:hover {
+    background-color: #5F9AED;
+    border: 1px solid #5F9AED;
+}
+
+.btn:active {
+    background-color: #2b5da3;
+    border: 1px solid #2b5da3;
 }
 
 .tengah {
@@ -57,20 +46,5 @@ input[type=file] {
 }
 
 h2{
-    color: #DF2230;
-}
-
-table{
-    overflow-y: auto;
-}
-
-.middle{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.table-bordered{
-    border: #868686;
+    color: #101410;
 }

@@ -1,4 +1,4 @@
-<!-- @extends('layout/main') -->
+@extends('layout/main')
 
 @section('form')
 
@@ -64,14 +64,11 @@
                 <div class="form-group mb-3">
                     <label class="form-label fw-bold" for="admin_type">Admin Type</label>
                     <div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="admin_type" id="super_admin" value="super_admin"/>
-                            <label class="form-check-label" for="admin_type">Super Admin</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="admin_type" id="admin" value="admin"/>
-                            <label class="form-check-label" for="admin_type">Admin</label>
-                        </div>
+                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="option1">Super Admin</label>
+
+                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary ms-2" for="option2">Admin</label>
                     </div>
                 </div>
                 @if (Session::has('register-error'))
@@ -83,7 +80,7 @@
             </form>
         </div>
     </div>                                    
-                    
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
     crossorigin="anonymous"></script>
