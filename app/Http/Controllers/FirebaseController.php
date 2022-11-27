@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PerusahaanExport;
+use App\Imports\PerusahaanImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Kreait\Firebase\Factory;
@@ -12,6 +13,7 @@ use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use App\Models\Perusahaan;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
+use Ramsey\Uuid\Type\Integer;
 
 use function JmesPath\search;
 
@@ -495,7 +497,108 @@ class FirebaseController extends Controller
         $export = new PerusahaanExport([
             $allPerusahaanData
         ]);
+
         return Excel::download($export, 'SOMESTA_Customer_Perusahaan.xlsx');
 	}
+
+    public function import_excel(Request $request)
+    {
+        $ref = $this->database->getReference('dbCustomer')->getValue();
+        
+        // initiate auto increment function
+        $highest_id = 0;
+        foreach($ref as $nums=>$d){
+            $highest_id = $nums;
+        }
+        $autoIncrementID = $highest_id+1;
+
+        
+
+        // validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand()."_".$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+		$file->move('uploaded_file',$nama_file);
+ 
+		// import data
+		// $importan = Excel::import(PerusahaanImport, public_path('/uploaded_file/'.$nama_file));
+        $importedPerusahaan = (new PerusahaanImport)->toArray(public_path('/uploaded_file/'.$nama_file));
+
+        // imported reference
+        // ^ array:12 [▼
+        // 0 => "PT Bintang Makmur"
+        // 1 => "grup1"
+        // 2 => "status3"
+        // 3 => 106.83169397795
+        // 4 => -6.2320093203783
+        // 5 => "Jawa Barat"
+        // 6 => 973347
+        // 7 => "perusahaan"
+        // 8 => "customer baik"
+        // 9 => "pertamina1"
+        // 10 => "Pertamina Mining Division"
+        // 11 => "Pertamina Jawa Tengah"
+        // ]
+
+        
+        foreach($importedPerusahaan as $structure=>$all){
+            foreach($all as $data){
+                if ($data == !NULL){
+                    if($data[0] != 'nama' && $data[0] != NULL){
+                        if ($ref == null) {
+                            //split coords
+                            $splittedKoordinat = explode(',',$data[3]);
+                            $ref = $this->database->getReference('dbCustomer/1')
+                            ->set([
+                                "nama" =>               $data[0],
+                                "group" =>              $data[1],
+                                "status" =>             $data[2],
+                                "koor_latitude" =>      floatval($splittedKoordinat[0]),
+                                "koor_longitude" =>     floatval($splittedKoordinat[1]),
+                                "lokasi" =>             $data[4],
+                                "kebutuhan" =>          $data[5],
+                                "jenis" =>              $data[6],
+                                "tipe_customer" =>      $data[7],
+                                "dilayani" =>           $data[8],
+                                "penyalur" =>           $data[9],
+                                "pelayanan" =>          $data[10],
+                            ]);
+                            dump($data);
+                        }
+                        else {
+                            //split coords
+                            $splittedKoordinat = explode(',',$data[3]);
+                            $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
+                            ->set([
+                                "nama" =>               $data[0],
+                                "group" =>              $data[1],
+                                "status" =>             $data[2],
+                                "koor_latitude" =>      floatval($splittedKoordinat[0]),
+                                "koor_longitude" =>     floatval($splittedKoordinat[1]),
+                                "lokasi" =>             $data[4],
+                                "kebutuhan" =>          $data[5],
+                                "jenis" =>              $data[6],
+                                "tipe_customer" =>      $data[7],
+                                "dilayani" =>           $data[8],
+                                "penyalur" =>           $data[9],
+                                "pelayanan" =>          $data[10],
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+ 
+		// alihkan halaman kembali
+		return redirect('/uploadcsv')->with('pesan','Berhasil import data dari file');;
+    }
 
 }
