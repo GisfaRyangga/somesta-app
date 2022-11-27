@@ -2,15 +2,11 @@
 
 namespace App\Exports;
 
-use App\Invoice;
 use Maatwebsite\Excel\Concerns\FromArray;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\Auth;
-use Firebase\Auth\Token\Exception\InvalidToken;
-use Kreait\Firebase\Exception\Auth\RevokedIdToken;
-use App\Http\Controllers\FirebaseController;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PerusahaanExport implements FromArray
+class PerusahaanExport implements FromArray, WithStyles
 {
     protected $invoices;
 
@@ -22,5 +18,13 @@ class PerusahaanExport implements FromArray
     public function array(): array
     {
         return $this->invoices;
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            // Style the first row as bold text.
+            1    => ['font' => ['bold' => true]],
+        ];
     }
 }

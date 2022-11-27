@@ -454,11 +454,29 @@ class FirebaseController extends Controller
         
         $allPerusahaanData = [];
         $individualPerusahaan = [];
+
+        //beri nama untuk tiap kolom
+        array_push($allPerusahaanData,[
+            'nama',
+            'group',
+            'status',
+            'koor_longitude',
+            'koor_latitude',
+            'lokasi',
+            'kebutuhan',
+            'jenis',
+            'tipe_customer',
+            'dilayani',
+            'penyalur',
+            'pelayanan',
+        ]);
+
         foreach($ref as $nums=>$d){
             if ($d == !NULL){
                 array_push($individualPerusahaan,$d['nama'         ]);
                 array_push($individualPerusahaan,$d['group'        ]);
                 array_push($individualPerusahaan,$d['status'       ]);
+                array_push($individualPerusahaan,$d['koor_longitude']);
                 array_push($individualPerusahaan,$d['koor_latitude']);
                 array_push($individualPerusahaan,$d['lokasi'       ]);
                 array_push($individualPerusahaan,$d['kebutuhan'    ]);
@@ -467,16 +485,17 @@ class FirebaseController extends Controller
                 array_push($individualPerusahaan,$d['dilayani'     ]);
                 array_push($individualPerusahaan,$d['penyalur'     ]);
                 array_push($individualPerusahaan,$d['pelayanan'    ]);
+                array_push($allPerusahaanData, $individualPerusahaan);
+                $individualPerusahaan = [];
             }
             
-            array_push($allPerusahaanData, $individualPerusahaan);
-            $individualPerusahaan = [];
-        }
 
+        }
+        // dump($allPerusahaanData);
         $export = new PerusahaanExport([
             $allPerusahaanData
         ]);
-        return Excel::download($export, 'inpo.xlsx');
+        return Excel::download($export, 'SOMESTA_Customer_Perusahaan.xlsx');
 	}
 
 }
