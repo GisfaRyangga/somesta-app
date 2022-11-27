@@ -1,0 +1,23 @@
+Dokumentasi Import Excel Files with Laravel
+
+1. include Laravel
+    composer require maatwebsite/excel
+2. Ada PHP Fatal error karena menggunakan laravel 9
+3. Soulsi, gunakan ini
+    composer require psr/simple-cache:^2.0 maatwebsite/excel
+
+sc: https://github.com/PHPOffice/PhpSpreadsheet/issues/3087
+
+
+1. ServiceProviders, config/app.php
+2. provider
+    Maatwebsite\Excel\ExcelServiceProvider::class,
+3. aliases
+    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+4. create config baru
+    php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"
+
+
+1. create Import
+    php artisan make:import PerusahaanImport --model=Perusahaan
+

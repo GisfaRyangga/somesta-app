@@ -3,11 +3,13 @@
 @section('form')
 
 <div class="container mt-4 d-flex">
+    
     <div class="row w-100 justify-content-center">
     @if (Session::has('pesan'))
         <div class="alert alert-success">{{Session::get('pesan')}}</div>
     @endif
     <h2 class="text-center mb-4 fw-bold">ALL CUSTOMER</h2>
+    <a href="/form/export_excel" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
         <table class="table table-bordered kecil">
             <thead>
                 <tr class="align-middle text-center ">

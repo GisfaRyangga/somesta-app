@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PerusahaanExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Kreait\Firebase\Factory;
@@ -10,6 +11,7 @@ use Firebase\Auth\Token\Exception\InvalidToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use App\Models\Perusahaan;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 use function JmesPath\search;
 
@@ -445,5 +447,36 @@ class FirebaseController extends Controller
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
     }
+    
+	public function export_excel()
+	{
+        $ref = $this->database->getReference('dbCustomer')->getValue();
         
+        $allPerusahaanData = [];
+        $individualPerusahaan = [];
+        foreach($ref as $nums=>$d){
+            if ($d == !NULL){
+                array_push($individualPerusahaan,$d['nama'         ]);
+                array_push($individualPerusahaan,$d['group'        ]);
+                array_push($individualPerusahaan,$d['status'       ]);
+                array_push($individualPerusahaan,$d['koor_latitude']);
+                array_push($individualPerusahaan,$d['lokasi'       ]);
+                array_push($individualPerusahaan,$d['kebutuhan'    ]);
+                array_push($individualPerusahaan,$d['jenis'        ]);
+                array_push($individualPerusahaan,$d['tipe_customer']);
+                array_push($individualPerusahaan,$d['dilayani'     ]);
+                array_push($individualPerusahaan,$d['penyalur'     ]);
+                array_push($individualPerusahaan,$d['pelayanan'    ]);
+            }
+            
+            array_push($allPerusahaanData, $individualPerusahaan);
+            $individualPerusahaan = [];
+        }
+
+        $export = new PerusahaanExport([
+            $allPerusahaanData
+        ]);
+        return Excel::download($export, 'inpo.xlsx');
+	}
+
 }

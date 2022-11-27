@@ -14,7 +14,7 @@
     <h2 class="text-center mb-4 fw-bold">CUSTOMER INPUT</h2>
     <div class="col-lg-5 mb-5 tengah">
         <div class="alert alert-warning" role="alert">
-            [in development] data yang di submit, otomatis akan masuk ke DB bila ada internet. Form kosong = data tidak masuk
+            [warning] Belum ada form validation
         </div>
         <form method="POST" action="{{ route('perusahaan.submitForm') }}">
             @csrf
