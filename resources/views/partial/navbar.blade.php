@@ -14,7 +14,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "uploadcsv") ? 'active' : '' }}"
-                    href="/uploadcsv">Upload CSV</a>
+                    href="/uploadcsv">Upload Excel</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ ($title === "show") ? 'active' : '' }}"

@@ -42,10 +42,10 @@
           {{ csrf_field() }}
           <p>Silahkan upload template yang sudah diisi di sini:</p>
           <input class="form-control" type="file" name="file" required="required">
-          <label class="form-text mt-2">*CSV only</label>
+          <label class="form-text mt-2">*Excel only</label>
           <div class="mt-2">
-            <button type="submit" class="btn btn-primary mr-5">
-              IMPORT EXCEL
+            <button type="submit" class="btn btnmerah btn-primary w-100 mt-3 fw-bold">
+              Kirim
             </button>
           </div>
         </form>
