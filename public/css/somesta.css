@@ -40,41 +40,49 @@ input[type=file] {
 .btn-outline-primary {
     border: 1px solid #3E85E9;
     color: #3E85E9;
+    border-radius: 7px;
 }
 
 .btn-outline-primary:hover {
     border: 1px solid #3E85E9;
     background-color: #3E85E9;
+    border-radius: 7px;
 }
 
 .btn-outline-primary:active {
     border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 .btn-outline-primary:checked {
     border: 1px solid #3E85E9;
     color: #3E85E9;
     background-color: #3E85E9;
+    border-radius: 7px;
 }
 
 .btnmerah {
     background-color: #3E85E9;
     border: 1px solid #3E85E9;
+    border-radius: 7px;
 }
 
 .btnmerah:hover {
     background-color: #5F9AED;
     border: 1px solid #5F9AED;
+    border-radius: 7px;
 }
 
 .btnmerah:active {
     background-color: #2b5da3;
     border: 1px solid #26518E;
+    border-radius: 7px;
 }
 
 .btndownload{
     background-color: #ADC52D;
     border: 1px solid #ADC52D;
+    border-radius: 7px;
 }
 
 .btndownload:hover{

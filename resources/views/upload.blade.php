@@ -1,18 +1,16 @@
 @extends('layout/main')
 
 @section('form')
-<link rel="stylesheet" href="css/stepper.css">
-<script src="js/stepper.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/upload_file.js"></script>
 
 <div class="container mt-4">
-
-  		
-  
   <h2 class="text-center mb-4 fw-bold">UPLOAD EXCEL DATA</h2>
-  @if (Session::has('pesan'))
-    <div class="alert alert-success">{{Session::get('pesan')}}</div>
-  @endif
   <div class="col-lg-5 tengah">
+    @if (Session::has('pesan'))
+      <div class="alert alert-success mb-3">{{Session::get('pesan')}}</div>
+    @endif
     <div class="shadow p-4 bg-body rounded-3 required text-center mb-5 row d-flex justify-content-between">
       <div class="col-md-2 align-self-center">
         <h2>1</h2>
@@ -41,10 +39,10 @@
         <form method="post" action="/form/import_excel" enctype="multipart/form-data">
           {{ csrf_field() }}
           <p>Silahkan upload template yang sudah diisi di sini:</p>
-          <input class="form-control" type="file" name="file" required="required">
+          <input id="file" class="form-control upload_excel" type="file" name="file" onchange="return fileValidation()" required="required">
           <label class="form-text mt-2">*Excel only</label>
           <div class="mt-2">
-            <button type="submit" class="btn btnmerah btn-primary w-100 mt-3 fw-bold">
+            <button id="btn_upload" type="submit" class="btn btnmerah btn-primary w-100 mt-3 fw-bold btn_upload">
               Kirim
             </button>
           </div>
