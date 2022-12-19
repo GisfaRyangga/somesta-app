@@ -29,7 +29,7 @@
                     
                 @endif
                 <li class="nav-item">
-                    <a class="nav-link {{ ($title === "About") ? 'active' : '' }}"
+                    <a class="nav-link {{ ($title === "about") ? 'active' : '' }}"
                     href="/about">About</a>
                 </li>
                 <li class="nav-item">
