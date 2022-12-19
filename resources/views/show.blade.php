@@ -34,7 +34,7 @@
                 @if ($d == null)
                     
                 @else
-                <tr>
+                <tr class="abu">
                     <td>{{ $local_id }}</td>
                     <td>{{ $d['nama'         ] }}</td>
                     <td>{{ $d['group'        ] }}</td>

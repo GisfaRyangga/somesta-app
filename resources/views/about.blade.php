@@ -6,15 +6,20 @@
         <hr>
         <div class="mt-4">
             <img src="img/pp.jpg" alt="ichigo" width="200" class="rounded-circle mb-3">
-            <h1 class="display-8">nama user</h1>
-            <p class="lead">isi bebas</p>
+            <p class="mt-2">Nama User:</p>
+            <p class="abu margin-minus">isi bebas</p>
         </div>
 
-        <h2>firebaseUserId:</h2>
-        <p>{{ Session::get('firebaseUserId'); }}</p>
+        <div>
+            <p>FirebaseUserId:</p>
+            <p class="abu margin-minus">{{ Session::get('firebaseUserId'); }}</p>
+        </div>
+        
         {{-- <h2>idToken:</h2>
         <p>{{ Session::get('idToken'); }}</p> --}}
-        <h2>role:</h2>
-        <p>{{ Session::get('thisUserRole'); }}</p>
+        <div>
+            <p>Role:</p>
+            <p class="abu margin-minus">{{ Session::get('thisUserRole'); }}</p>
+        </div>
     </div>
 @endsection
