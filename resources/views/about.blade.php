@@ -5,7 +5,7 @@
         <h1>About Page</h1>
         <hr>
         <div class="mt-4">
-            <img src="img/pp.jpg" alt="ichigo" width="200" class="rounded-circle mb-3">
+            <img src="img/pp.jpg" alt="ichigo" width="100" class="rounded-circle mb-3">
             <p class="mt-2">Nama User:</p>
             <p class="abu margin-minus">isi bebas</p>
         </div>
