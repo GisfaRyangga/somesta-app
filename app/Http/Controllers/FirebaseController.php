@@ -74,9 +74,7 @@ class FirebaseController extends Controller
             // before
             $ref = $this->database->getReference('dbAdmin')->getValue();
             foreach($ref as $admin_id=>$data){
-                // $highest_id = $nums;
                 foreach($data as $current_admin=>$creds){
-                    // $highest_id = $nums;
                     if($current_admin == "email"){
                         if ($creds == $email){
                             if (array_search('super_admin',$data,true) == true){
@@ -91,16 +89,18 @@ class FirebaseController extends Controller
                     }
                 }
             }
+
+
             Session::put('firebaseUserId', $signInResult->firebaseUserId());
             Session::put('idToken', $signInResult->idToken());
             Session::put('email', $email);
             Session::save();
 
-            // dump($signInResult);
+            dump($signInResult);
             // dump($email);
 
             // dd($signInResult);
-            return redirect('/about');
+            // return redirect('/about');
         } catch (\Throwable $e) {
             switch ($e->getMessage()) {
                 case 'INVALID_PASSWORD':
