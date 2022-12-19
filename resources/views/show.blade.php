@@ -31,7 +31,7 @@
             </thead>
             <tbody id="CustomerData">   
                 @foreach ($ref as $data=>$d)
-                @if ($data == null)
+                @if ($d == null)
                     
                 @else
                 <tr>
