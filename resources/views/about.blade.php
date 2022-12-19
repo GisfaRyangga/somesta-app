@@ -10,10 +10,10 @@
             <p class="abu margin-minus">{{ Session::get('email'); }}</p>
         </div>
 
-        <div>
+        {{-- <div>
             <p>FirebaseUserId:</p>
             <p class="abu margin-minus">{{ Session::get('firebaseUserId'); }}</p>
-        </div>
+        </div> --}}
         
         <div>
             <p>Role:</p>

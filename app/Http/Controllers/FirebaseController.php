@@ -96,11 +96,11 @@ class FirebaseController extends Controller
             Session::put('email', $email);
             Session::save();
 
-            dump($signInResult);
+            // dump($signInResult);
             // dump($email);
 
             // dd($signInResult);
-            // return redirect('/about');
+            return redirect('/about');
         } catch (\Throwable $e) {
             switch ($e->getMessage()) {
                 case 'INVALID_PASSWORD':

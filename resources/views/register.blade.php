@@ -10,8 +10,8 @@
                 <div class="alert alert-success">{{Session::get('pesan')}}</div>
             @endif
             
-            <div class="alert alert-warning">USERNAME SEMENTARA DISABLED KARENA ALASAN UX</div>
-            <div class="alert alert-warning">Admin yang di add akan masuk di Firebase RealtimeDatabase dan Firebase Authentication</div>
+            {{-- <div class="alert alert-warning">USERNAME SEMENTARA DISABLED KARENA ALASAN UX</div>
+            <div class="alert alert-warning">Admin yang di add akan masuk di Firebase RealtimeDatabase dan Firebase Authentication</div> --}}
             <form class="needs-validation" method="POST" action="{{ route('register_admin') }}">
                 @csrf
                 <div class="row mb-3">
