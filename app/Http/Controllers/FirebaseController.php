@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use App\Exports\PerusahaanExport;
 use App\Imports\PerusahaanImport;
 use Illuminate\Http\Request;
@@ -14,6 +14,7 @@ use App\Models\Perusahaan;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use Ramsey\Uuid\Type\Integer;
+
 
 use function JmesPath\search;
 
@@ -104,14 +105,12 @@ class FirebaseController extends Controller
         } catch (\Throwable $e) {
             switch ($e->getMessage()) {
                 case 'INVALID_PASSWORD':
-                    // dd("Kata sandi salah!.");
                     return redirect('/login')->with('login-error','Username/password salah');
                     break;
                 case 'EMAIL_NOT_FOUND':
                     return redirect('/login')->with('login-error','Username/password salah');
                     break;
                 default:
-                    // dd($e->getMessage());
                     return redirect('/login')->with('login-error',$e->getMessage());
                     break;
             }
@@ -267,9 +266,10 @@ class FirebaseController extends Controller
             }
             $autoIncrementID = $highest_id+1;
 
-            //split coords
-            $splittedKoordinat = explode(',',$request->koordinat);
-
+            try {
+                //split coords
+                $splittedKoordinat = explode(',',$request->koordinat);
+                
             if ($ref == null) {
                 $ref = $this->database->getReference('dbCustomer/1')
                 ->set([
@@ -286,10 +286,10 @@ class FirebaseController extends Controller
                     "penyalur" => $request->penyalur,
                     "pelayanan" => $request->pelayanan,
                 ]);
+                return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             }
             
             else {
-                
                 $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
                 ->set([
                     "nama" => $request->nama,
@@ -306,6 +306,7 @@ class FirebaseController extends Controller
                     "pelayanan" => $request->pelayanan,
                 ]);
                 // dump($autoIncrementID);
+                return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             }
             // dump([
             //     "nama" => $request->nama,
@@ -322,7 +323,6 @@ class FirebaseController extends Controller
             //     "pelayanan"=> $request->pelayanan,
             // ]);
 
-            return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             
             
             // dump($ref);
@@ -332,6 +332,12 @@ class FirebaseController extends Controller
             // after
             // $ref = $this->database->getReference('dbCustomer/namaPerusahaan')->getValue();
             // dump($ref);
+            }
+            
+            catch(Exception $e) {
+                return redirect('/form')->with('pesan','Format tidak sesuai. Silahkan isi form dengan format yang sesuai');
+            }
+
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
