@@ -1,6 +1,6 @@
 function fileValidation() {
     var fileInput =
-        document.getElementById('file_upload');
+        document.getElementById('file');
      
     var filePath = fileInput.value;
  
