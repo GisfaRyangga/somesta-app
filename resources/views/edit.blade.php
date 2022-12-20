@@ -9,9 +9,9 @@
 <div class="container mt-4">
     <h2 class="text-center mb-4 fw-bold">CUSTOMER EDIT</h2>
     <div class="col-lg-5 mb-5 tengah">
-        <div class="alert alert-warning" role="alert">
+        {{-- <div class="alert alert-warning" role="alert">
             Pastikan semua field terisi! karena belum ada validation.
-        </div>
+        </div> --}}
         <form method="POST" action="{{ route('update.perusahaan',$data_id)}}">
             @csrf
             <div class="mb-3">

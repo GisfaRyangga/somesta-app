@@ -247,7 +247,7 @@ class FirebaseController extends Controller
                     "penyalur" => $request->penyalur,
                     "pelayanan" => $request->pelayanan,
                 ]);
-            return redirect('/show')->with('pesan','Data user berhasil diperbarui');
+            return redirect('/show')->with('pesan','Data perusahaan berhasil diperbarui');
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
@@ -450,7 +450,7 @@ class FirebaseController extends Controller
             // update(["key" => null])
             // $ref = $this->database->getReference('hewan/karnivora/harimau')
             //     ->update(["benggala" => null]);
-            return redirect('/show')->with('pesan','Data user berhasil dihapus');
+            return redirect('/show')->with('pesan','Data perusahaan berhasil dihapus');
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
