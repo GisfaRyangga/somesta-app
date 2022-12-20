@@ -45,7 +45,7 @@ use App\Http\Controllers\SomestaController;
 // });
 
 Route::get('/login', [SomestaController::class, 'tampil_login']);
-Route::get('/register_form', [SomestaController::class, 'tampil_register']);
+Route::get('/add_admin', [SomestaController::class, 'tampil_register']);
 Route::get('/form', [SomestaController::class, 'tampil_form']);
 Route::post('/form/import_excel', [FirebaseController::class, 'import_excel']);
 Route::get('/form/export_excel', [FirebaseController::class, 'export_excel']);

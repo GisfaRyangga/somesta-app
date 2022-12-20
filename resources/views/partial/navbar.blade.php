@@ -23,7 +23,7 @@
                 @if (Session::get('thisUserRole') == 'super_admin')
                     <li class="nav-item">
                         <a class="nav-link {{ ($title === "register") ? 'active' : '' }}"
-                        href="/register_form">Add Admin</a>
+                        href="/add_admin">Add Admin</a>
                     </li>
                 @else
                     
