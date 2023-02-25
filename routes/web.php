@@ -79,4 +79,5 @@ Route::get('/register', [FirebaseController::class, 'signUp']);
 // Route::get('/login', [FirebaseController::class, 'signIn']);
 Route::get('/logout', [FirebaseController::class, 'signOut']);
 Route::get('/check', [FirebaseController::class, 'userCheck']);
+Route::get('/', [FirebaseController::class, 'about']);
 Route::get('/about', [FirebaseController::class, 'about']);
