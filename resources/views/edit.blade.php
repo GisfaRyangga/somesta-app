@@ -2,6 +2,7 @@
 
 @section('form')
 
+
 @section('style_update')
 <link rel="stylesheet" href="{{ asset('css/update.css') }}">
 @endsection
@@ -20,13 +21,20 @@
                 <label class="form-text">Contoh: PT. Kencana Griya Abadi</label>
             </div>
             <div class="mb-3">
-                <label for="group" class="form-label fw-bold">Group</label>
+                <label for="group" class="form-label fw-bold">Perusahaan Group/Holding</label>
                 <input type="text" name="group" class="form-control" autocomplete="off" value="{{ $ref['group'] }}">
                 <label class="form-text">Contoh: Sinar Mas</label>
             </div>
             <div class="mb-3">
                 <label for="status" class="form-label fw-bold">Status</label>
-                <input type="text" name="status" class="form-control" autocomplete="off" value="{{ $ref['status'] }}">
+                <div>
+                    <input type="radio" class="btn-check" name="options1" id="option1" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="option1">Aktif</label>
+
+                    <input type="radio" class="btn-check" name="options1" id="option2" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="option2">Inaktif</label> 
+                </div>
+                {{-- <input type="text" name="status" class="form-control" autocomplete="off" value="{{ $ref['status'] }}"> --}}
                 <label class="form-text">Contoh: Aktif</label>
             </div>
             <div class="mb-3">
@@ -40,9 +48,14 @@
                 <label class="form-text">Contoh: Kertanegara, Kalimantan Timur</label>
             </div>
             <div class="mb-3">
-                <label for="kebutuhan" class="form-label fw-bold">Kebutuhan Perbulan</label>
+                <label for="kebutuhan" class="form-label fw-bold">Kebutuhan Total per Bulan (KL)</label>
                 <input type="number" name="kebutuhan" class="form-control" autocomplete="off" placeholder="Satuan KL" value="{{ $ref['kebutuhan'] }}"> 
                 <label class="form-text">Contoh: 2000</label>
+            </div>
+            <div class="mb-3">
+                <label for="market_share" class="form-label fw-bold">Market Share Pertamina (%)</label>
+                <input type="number" name="market_share" class="form-control" autocomplete="off" placeholder="Satuan KL" value="{{ $ref['kebutuhan'] }}"> 
+                <label class="form-text">Contoh: 50</label>
             </div>
             <div class="mb-3">
                 <label for="jenis" class="form-label fw-bold">Jenis Industri</label>
@@ -51,11 +64,18 @@
             </div>
             <div class="mb-3">
                 <label for="tipe_customer" class="form-label fw-bold">Tipe Customer</label>
-                <input type="text" name="tipe_customer" class="form-control" autocomplete="off" value="{{ $ref['tipe_customer'] }}">
+                <div>
+                    <input type="radio" class="btn-check" name="options2" id="option3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="option3">Direct</label>
+
+                    <input type="radio" class="btn-check" name="options2" id="option4" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="option4">Indirect</label>
+                </div>
+                {{-- <input type="text" name="tipe_customer" class="form-control" autocomplete="off" value="{{ $ref['tipe_customer'] }}"> --}}
                 <label class="form-text">Contoh: Kontrak</label>
             </div>
             <div class="mb-3">
-                <label for="dilayani" class="form-label fw-bold">Dilayani/disupply oleh</label>
+                <label for="dilayani" class="form-label fw-bold">Kompetitor</label>
                 <input type="text" name="dilayani" class="form-control" autocomplete="off" value="{{ $ref['dilayani'] }}">
                 <label class="form-text">Contoh: Pertamina/Exxon/AKR/Bnameding</label>
             </div>
@@ -65,9 +85,22 @@
                 <label class="form-text">Contoh: ABC</label>
             </div>
             <div class="mb-3">
-                <label for="pelayanan" class="form-label fw-bold">Pelayanan</label>
-                <input type="text" name="pelayanan" class="form-control" autocomplete="off" value="{{ $ref['pelayanan'       ] }}">
-                <label class="form-text">Contoh: VHS/LOCO/FRANCO</label>
+                <label for="pelayanan" class="form-label fw-bold">Layanan</label>
+                <div>
+                    <input type="radio" class="btn-check" name="options3" id="option5" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="option5">LOCO</label>
+
+                    <input type="radio" class="btn-check" name="options3" id="option6" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="option6">FRANCO</label>
+
+                    <input type="radio" class="btn-check" name="options3" id="option7" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="option7">VHS</label>
+
+                    <input type="radio" class="btn-check" name="options3" id="option8" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="option8">FMS</label>
+                </div>
+                {{-- <input type="text" name="pelayanan" class="form-control" autocomplete="off" value="{{ $ref['pelayanan'] }}"> --}}
+                {{-- <label class="form-text">Contoh: VHS/LOCO/FRANCO</label> --}}
             </div>
             <div class="mb-3">
                 <button type="submit" onclick="return confirm('Yakin data sudah benar?')" class="btn btn-primary w-100 mt-3 fw-bold">Update</button>

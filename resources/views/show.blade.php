@@ -16,16 +16,17 @@
                 <tr class="align-middle text-center">
                     <th>No</th>
                     <th>Nama Perusahaan</th>
-                    <th>Group</th>
+                    <th>Perusahaan Group/Holding</th>
                     <th>Status</th>
                     <th>Koordinat</th>
                     <th>Wilayah Kabupaten, Provinsi</th>
-                    <th>Kebutuhan perbulan</th>
+                    <th>Kebutuhan Total per Bulan (KL)</th>
+                    <th>Market Share Pertamina (%)</th>
                     <th>Jenis Industri</th>
                     <th>Tipe Customer</th>
-                    <th>Disupply oleh</th>
+                    <th>Kompetitor</th>
                     <th>Penyalur</th>
-                    <th>Pelayanan</th>
+                    <th>Layanan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>

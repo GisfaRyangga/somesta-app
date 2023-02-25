@@ -26,19 +26,28 @@ input[type=password] {
     border-radius: 7px;
 }
 
-.btn {
-    background-color: #3E85E9;
+.btn-outline-primary {
     border: 1px solid #3E85E9;
+    color: #3E85E9;
+    border-radius: 7px;
 }
 
-.btn:hover {
-    background-color: #5F9AED;
-    border: 1px solid #5F9AED;
+.btn-outline-primary:hover {
+    border: 1px solid #3E85E9;
+    background-color: #3E85E9;
+    border-radius: 7px;
 }
 
-.btn:active {
-    background-color: #2b5da3;
-    border: 1px solid #2b5da3;
+.btn-outline-primary:active {
+    border: 1px solid #3E85E9;
+    border-radius: 7px;
+}
+
+.btn-outline-primary:checked {
+    border: 1px solid #3E85E9;
+    color: #3E85E9;
+    background-color: #3E85E9;
+    border-radius: 7px;
 }
 
 .tengah {
