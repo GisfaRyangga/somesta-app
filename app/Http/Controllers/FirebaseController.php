@@ -223,7 +223,10 @@ class FirebaseController extends Controller
             $ref_longitude =  $this->database->getReference('dbCustomer/'.$data."/koor_longitude")->getValue();
             $ref_latitude =  $this->database->getReference('dbCustomer/'.$data."/koor_latitude")->getValue();
             $ref_combined_coords = $ref_latitude.", ".$ref_longitude;
-            return view('edit', ['title' => 'show'], compact('ref','ref_combined_coords','data_id'));
+            $ref_status = $this->database->getReference('dbCustomer/'.$data."/status")->getValue();
+            $ref_tipe_customer = $this->database->getReference('dbCustomer/'.$data."/tipe_customer")->getValue();
+            $ref_layanan = $this->database->getReference('dbCustomer/'.$data."/layanan")->getValue();
+            return view('edit', ['title' => 'show'], compact('ref','ref_combined_coords','data_id','ref_status','ref_tipe_customer', 'ref_layanan'));
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
@@ -241,11 +244,12 @@ class FirebaseController extends Controller
                     "koor_longitude" => floatval($splittedKoordinat[1]),
                     "lokasi" => $request->lokasi,
                     "kebutuhan" => $request->kebutuhan,
+                    "market_share" => $request->market_share,
                     "jenis" => $request->jenis,
                     "tipe_customer" => $request->tipe_customer,
-                    "dilayani" => $request->dilayani,
+                    "kompetitor" => $request->kompetitor,
                     "penyalur" => $request->penyalur,
-                    "pelayanan" => $request->pelayanan,
+                    "layanan" => $request->layanan,
                 ]);
             return redirect('/show')->with('pesan','Data perusahaan berhasil diperbarui');
         }else if($this->userCheck() == false){
@@ -285,7 +289,7 @@ class FirebaseController extends Controller
                     "tipe_customer" => $request->tipe_customer,
                     "kompetitor" => $request->kompetitor,
                     "penyalur" => $request->penyalur,
-                    "pelayanan" => $request->pelayanan,
+                    "layanan" => $request->layanan,
                 ]);
                 return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             }
@@ -305,7 +309,7 @@ class FirebaseController extends Controller
                     "tipe_customer" => $request->tipe_customer,
                     "kompetitor" => $request->kompetitor,
                     "penyalur" => $request->penyalur,
-                    "pelayanan" => $request->pelayanan,
+                    "layanan" => $request->layanan,
                 ]);
                 // dump($autoIncrementID);
                 return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
@@ -323,7 +327,7 @@ class FirebaseController extends Controller
             //         "tipe_customer" => $request->tipe_customer,
             //         "kompetitor" => $request->kompetitor,
             //         "penyalur" => $request->penyalur,
-            //         "pelayanan" => $request->pelayanan,
+            //         "layanan" => $request->layanan,
             // ]);
 
             

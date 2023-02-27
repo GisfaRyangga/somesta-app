@@ -48,7 +48,7 @@
                     <td>{{ $d['tipe_customer'] }}</td>
                     <td>{{ $d['kompetitor'     ] }}</td>
                     <td>{{ $d['penyalur'     ] }}</td>
-                    <td>{{ $d['pelayanan'    ] }}</td>
+                    <td>{{ $d['layanan'    ] }}</td>
                     
                     @php
                         $local_id++

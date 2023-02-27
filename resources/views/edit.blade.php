@@ -28,12 +28,21 @@
             <div class="mb-3">
                 <label for="status" class="form-label fw-bold">Status</label>
                 <div>
-                    <input type="radio" class="btn-check" name="options1" id="option1" autocomplete="off">
+                    @if ($ref_status == "Aktif")
+                    <input type="radio" class="btn-check" name="status" id="option1" value="Aktif" autocomplete="off" checked>
                     <label class="btn btn-outline-primary" for="option1">Aktif</label>
 
-                    <input type="radio" class="btn-check" name="options1" id="option2" autocomplete="off">
+                    <input type="radio" class="btn-check" name="status" id="option2" value="Inaktif" autocomplete="off">
                     <label class="btn btn-outline-primary ms-2" for="option2">Inaktif</label> 
-                </div>
+
+                    @else
+                    <input type="radio" class="btn-check" name="status" id="option1" value="Aktif" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="option1">Aktif</label>
+
+                    <input type="radio" class="btn-check" name="status" id="option2" value="Inaktif" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary ms-2" for="option2">Inaktif</label> 
+                    @endif
+                    </div>
                 {{-- <input type="text" name="status" class="form-control" autocomplete="off" value="{{ $ref['status'] }}"> --}}
                 <label class="form-text">Contoh: Aktif</label>
             </div>
@@ -54,7 +63,7 @@
             </div>
             <div class="mb-3">
                 <label for="market_share" class="form-label fw-bold">Market Share Pertamina (%)</label>
-                <input type="number" name="market_share" class="form-control" autocomplete="off" placeholder="Satuan KL" value="{{ $ref['kebutuhan'] }}"> 
+                <input type="number" name="market_share" class="form-control" autocomplete="off" placeholder="Satuan KL" value="{{ $ref['market_share'] }}"> 
                 <label class="form-text">Contoh: 50</label>
             </div>
             <div class="mb-3">
@@ -65,18 +74,25 @@
             <div class="mb-3">
                 <label for="tipe_customer" class="form-label fw-bold">Tipe Customer</label>
                 <div>
-                    <input type="radio" class="btn-check" name="options2" id="option3" autocomplete="off">
+                    @if ($ref_tipe_customer == "Direct")
+                    <input type="radio" class="btn-check" name="tipe_customer" id="option3" value="Direct" autocomplete="off" checked>
                     <label class="btn btn-outline-primary" for="option3">Direct</label>
 
-                    <input type="radio" class="btn-check" name="options2" id="option4" autocomplete="off">
+                    <input type="radio" class="btn-check" name="tipe_customer" id="option4" value="Indirect" autocomplete="off">
                     <label class="btn btn-outline-primary ms-2" for="option4">Indirect</label>
+                    @else
+                    <input type="radio" class="btn-check" name="tipe_customer" id="option3" value="Direct" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="option3">Direct</label>
+
+                    <input type="radio" class="btn-check" name="tipe_customer" id="option4" value="Indirect" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary ms-2" for="option4">Indirect</label>
+                    @endif
                 </div>
                 {{-- <input type="text" name="tipe_customer" class="form-control" autocomplete="off" value="{{ $ref['tipe_customer'] }}"> --}}
-                <label class="form-text">Contoh: Kontrak</label>
             </div>
             <div class="mb-3">
-                <label for="dilayani" class="form-label fw-bold">Kompetitor</label>
-                <input type="text" name="dilayani" class="form-control" autocomplete="off" value="{{ $ref['dilayani'] }}">
+                <label for="kompetitor" class="form-label fw-bold">Kompetitor</label>
+                <input type="text" name="kompetitor" class="form-control" autocomplete="off" value="{{ $ref['kompetitor'] }}">
                 <label class="form-text">Contoh: Pertamina/Exxon/AKR/Bnameding</label>
             </div>
             <div class="mb-3">
@@ -87,17 +103,37 @@
             <div class="mb-3">
                 <label for="pelayanan" class="form-label fw-bold">Layanan</label>
                 <div>
-                    <input type="radio" class="btn-check" name="options3" id="option5" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="option5">LOCO</label>
+                    @if ($ref_layanan == "LOCO")
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan1" value="LOCO" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="pelayanan1">LOCO</label> 
+                    @else
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan1" value="LOCO" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="pelayanan1">LOCO</label>  
+                    @endif
 
-                    <input type="radio" class="btn-check" name="options3" id="option6" autocomplete="off">
-                    <label class="btn btn-outline-primary ms-2" for="option6">FRANCO</label>
+                    @if ($ref_layanan == "FRANCO")
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan2" value="FRANCO" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan2">FRANCO</label>
+                    @else
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan2" value="FRANCO" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan2">FRANCO</label>
+                    @endif
 
-                    <input type="radio" class="btn-check" name="options3" id="option7" autocomplete="off">
-                    <label class="btn btn-outline-primary ms-2" for="option7">VHS</label>
+                    @if ($ref_layanan == "VHS")
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan3" value="VHS" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan3">VHS</label>
+                    @else
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan3" value="VHS" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan3">VHS</label>
+                    @endif
 
-                    <input type="radio" class="btn-check" name="options3" id="option8" autocomplete="off">
-                    <label class="btn btn-outline-primary ms-2" for="option8">FMS</label>
+                    @if ($ref_layanan == "FMS")
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan4" value="FMS" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan4">FMS</label> 
+                    @else
+                    <input type="radio" class="btn-check" name="layanan" id="pelayanan4" value="FMS" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan4">FMS</label>  
+                    @endif
                 </div>
                 {{-- <input type="text" name="pelayanan" class="form-control" autocomplete="off" value="{{ $ref['pelayanan'] }}"> --}}
                 {{-- <label class="form-text">Contoh: VHS/LOCO/FRANCO</label> --}}
