@@ -43,11 +43,13 @@
                     <td>{{ $d['koor_latitude'] }}</td>
                     <td>{{ $d['lokasi'       ] }}</td>
                     <td>{{ $d['kebutuhan'    ] }}</td>
+                    <td>{{ $d['market_share' ] }}</td>
                     <td>{{ $d['jenis'        ] }}</td>
                     <td>{{ $d['tipe_customer'] }}</td>
-                    <td>{{ $d['dilayani'     ] }}</td>
+                    <td>{{ $d['kompetitor'     ] }}</td>
                     <td>{{ $d['penyalur'     ] }}</td>
                     <td>{{ $d['pelayanan'    ] }}</td>
+                    
                     @php
                         $local_id++
                     @endphp

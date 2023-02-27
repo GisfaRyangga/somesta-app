@@ -280,15 +280,16 @@ class FirebaseController extends Controller
                     "koor_longitude" => floatval($splittedKoordinat[1]),
                     "lokasi" => $request->lokasi,
                     "kebutuhan" => $request->kebutuhan,
+                    "market_share" => $request->market_share,
                     "jenis" => $request->jenis,
                     "tipe_customer" => $request->tipe_customer,
-                    "dilayani" => $request->dilayani,
+                    "kompetitor" => $request->kompetitor,
                     "penyalur" => $request->penyalur,
                     "pelayanan" => $request->pelayanan,
                 ]);
                 return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             }
-            
+
             else {
                 $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
                 ->set([
@@ -299,9 +300,10 @@ class FirebaseController extends Controller
                     "koor_longitude" => floatval($splittedKoordinat[1]),
                     "lokasi" => $request->lokasi,
                     "kebutuhan" => $request->kebutuhan,
+                    "market_share" => $request->market_share,
                     "jenis" => $request->jenis,
                     "tipe_customer" => $request->tipe_customer,
-                    "dilayani" => $request->dilayani,
+                    "kompetitor" => $request->kompetitor,
                     "penyalur" => $request->penyalur,
                     "pelayanan" => $request->pelayanan,
                 ]);
@@ -309,18 +311,19 @@ class FirebaseController extends Controller
                 return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             }
             // dump([
-            //     "nama" => $request->nama,
-            //     "group" => $request->group,
-            //     "status"=> $request->status,
-            //     "koor_latitude" => $splittedKoordinat[0],
-            //     "koor_longitude" => $splittedKoordinat[1],
-            //     "lokasi"=> $request->lokasi,
-            //     "kebutuhan"=> $request->kebutuhan,
-            //     "jenis"=> $request->jenis,
-            //     "tipe_customer" => $request->tipe_customer,
-            //     "dilayani"=> $request->dilayani,
-            //     "penyalur"=> $request->penyalur,
-            //     "pelayanan"=> $request->pelayanan,
+            //         "nama" => $request->nama,
+            //         "group" => $request->group,
+            //         "status" => $request->status,
+            //         "koor_latitude" => floatval($splittedKoordinat[0]),
+            //         "koor_longitude" => floatval($splittedKoordinat[1]),
+            //         "lokasi" => $request->lokasi,
+            //         "kebutuhan" => $request->kebutuhan,
+            //         "market_share" => $request->market_share,
+            //         "jenis" => $request->jenis,
+            //         "tipe_customer" => $request->tipe_customer,
+            //         "kompetitor" => $request->kompetitor,
+            //         "penyalur" => $request->penyalur,
+            //         "pelayanan" => $request->pelayanan,
             // ]);
 
             

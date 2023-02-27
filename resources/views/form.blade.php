@@ -31,10 +31,10 @@
             <div class="mb-3">
                 <label for="status" class="form-label fw-bold">Status</label>
                 <div>
-                    <input type="radio" class="btn-check" name="options1" id="option1" autocomplete="off">
+                    <input type="radio" class="btn-check" name="status" id="option1" value="Aktif" autocomplete="off">
                     <label class="btn btn-outline-primary" for="option1">Aktif</label>
 
-                    <input type="radio" class="btn-check" name="options1" id="option2" autocomplete="off">
+                    <input type="radio" class="btn-check" name="status" id="option2" value="Inaktif" autocomplete="off">
                     <label class="btn btn-outline-primary ms-2" for="option2">Inaktif</label> 
                 </div>
                 {{-- <label class="form-text">Contoh: Aktif</label> --}}
@@ -57,7 +57,7 @@
             <div class="mb-3">
                 <label for="market_share" class="form-label fw-bold">Market Share Pertamina (%)</label>
                 <input type="number" name="market_share" class="form-control" autocomplete="off">
-                <label class="form-text">Contoh: 2000</label>
+                <label class="form-text">Contoh: 80</label>
             </div>
             <div class="mb-3">
                 <label for="jenis" class="form-label fw-bold">Jenis Industri</label>
@@ -67,17 +67,17 @@
             <div class="mb-3">
                 <label for="tipe_customer" class="form-label fw-bold">Tipe Customer</label>
                 <div>
-                    <input type="radio" class="btn-check" name="options2" id="option3" autocomplete="off">
+                    <input type="radio" class="btn-check" name="tipe_customer" id="option3" value="Direct" autocomplete="off">
                     <label class="btn btn-outline-primary" for="option3">Direct</label>
 
-                    <input type="radio" class="btn-check" name="options2" id="option4" autocomplete="off">
+                    <input type="radio" class="btn-check" name="tipe_customer" id="option4" value="Indirect" autocomplete="off">
                     <label class="btn btn-outline-primary ms-2" for="option4">Indirect</label>
                 </div>
                 {{-- <label class="form-text">Contoh: Kontrak</label> --}}
             </div>
             <div class="mb-3">
-                <label for="dilayani" class="form-label fw-bold">Kompetitor</label>
-                <input type="text" name="dilayani" class="form-control" autocomplete="off">
+                <label for="kompetitor" class="form-label fw-bold">Kompetitor</label>
+                <input type="text" name="kompetitor" class="form-control" autocomplete="off">
                 <label class="form-text">Contoh: Pertamina/Exxon/AKR/Bnameding</label>
             </div>
             <div class="mb-3">
@@ -88,17 +88,17 @@
             <div class="mb-3">
                 <label for="pelayanan" class="form-label fw-bold">Layanan</label>
                 <div>
-                    <input type="radio" class="btn-check" name="options3" id="option5" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="option5">LOCO</label>
+                    <input type="radio" class="btn-check" name="pelayanan" id="pelayanan1" value="LOCO" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="pelayanan1">LOCO</label>
 
-                    <input type="radio" class="btn-check" name="options3" id="option6" autocomplete="off">
-                    <label class="btn btn-outline-primary ms-2" for="option6">FRANCO</label>
+                    <input type="radio" class="btn-check" name="pelayanan" id="pelayanan2" value="FRANCO" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan2">FRANCO</label>
 
-                    <input type="radio" class="btn-check" name="options3" id="option7" autocomplete="off">
-                    <label class="btn btn-outline-primary ms-2" for="option7">VHS</label>
+                    <input type="radio" class="btn-check" name="pelayanan" id="pelayanan3" value="VHS" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan3">VHS</label>
 
-                    <input type="radio" class="btn-check" name="options3" id="option8" autocomplete="off">
-                    <label class="btn btn-outline-primary ms-2" for="option8">FMS</label>
+                    <input type="radio" class="btn-check" name="pelayanan" id="pelayanan4" value="FMS" autocomplete="off">
+                    <label class="btn btn-outline-primary ms-2" for="pelayanan4">FMS</label>
                 </div>
                 {{-- <label class="form-text">Contoh: VHS/LOCO/FRANCO</label> --}}
             </div>
