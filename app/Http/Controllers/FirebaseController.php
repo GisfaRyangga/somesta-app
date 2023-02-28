@@ -479,11 +479,12 @@ class FirebaseController extends Controller
             'koor_latitude',
             'lokasi',
             'kebutuhan',
+            'market_share',
             'jenis',
             'tipe_customer',
-            'dilayani',
+            'kompetitor',
             'penyalur',
-            'pelayanan',
+            'layanan',
         ]);
 
         foreach($ref as $nums=>$d){
@@ -495,11 +496,12 @@ class FirebaseController extends Controller
                 array_push($individualPerusahaan,$d['koor_latitude']);
                 array_push($individualPerusahaan,$d['lokasi'       ]);
                 array_push($individualPerusahaan,$d['kebutuhan'    ]);
+                array_push($individualPerusahaan,$d['market_share'    ]);
                 array_push($individualPerusahaan,$d['jenis'        ]);
                 array_push($individualPerusahaan,$d['tipe_customer']);
-                array_push($individualPerusahaan,$d['dilayani'     ]);
+                array_push($individualPerusahaan,$d['kompetitor'     ]);
                 array_push($individualPerusahaan,$d['penyalur'     ]);
-                array_push($individualPerusahaan,$d['pelayanan'    ]);
+                array_push($individualPerusahaan,$d['layanan'    ]);
                 array_push($allPerusahaanData, $individualPerusahaan);
                 $individualPerusahaan = [];
             }
@@ -578,11 +580,12 @@ class FirebaseController extends Controller
                                 "koor_longitude" =>     floatval($splittedKoordinat[1]),
                                 "lokasi" =>             $data[4],
                                 "kebutuhan" =>          $data[5],
-                                "jenis" =>              $data[6],
-                                "tipe_customer" =>      $data[7],
-                                "dilayani" =>           $data[8],
-                                "penyalur" =>           $data[9],
-                                "pelayanan" =>          $data[10],
+                                "market_share" =>       $data[6],
+                                "jenis" =>              $data[7],
+                                "tipe_customer" =>      $data[8],
+                                "kompetitor" =>         $data[9],
+                                "penyalur" =>           $data[10],
+                                "layanan" =>            $data[11],
                             ]);
                             dump($data);
                         }
@@ -598,11 +601,12 @@ class FirebaseController extends Controller
                                 "koor_longitude" =>     floatval($splittedKoordinat[1]),
                                 "lokasi" =>             $data[4],
                                 "kebutuhan" =>          $data[5],
-                                "jenis" =>              $data[6],
-                                "tipe_customer" =>      $data[7],
-                                "dilayani" =>           $data[8],
-                                "penyalur" =>           $data[9],
-                                "pelayanan" =>          $data[10],
+                                "market_share" =>       $data[6],
+                                "jenis" =>              $data[7],
+                                "tipe_customer" =>      $data[8],
+                                "kompetitor" =>         $data[9],
+                                "penyalur" =>           $data[10],
+                                "layanan" =>            $data[11],
                             ]);
                         }
                     }
