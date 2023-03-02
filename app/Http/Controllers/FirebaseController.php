@@ -203,6 +203,7 @@ class FirebaseController extends Controller
             $ref = $this->database->getReference('dbAdmin/')->getValue();
             $local_id = 1;
             return view('admins', ['title' => 'show admin'], compact('ref','local_id'));
+            // dump($ref);
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
@@ -376,71 +377,68 @@ class FirebaseController extends Controller
 
             $fullName = $request->firstname." ".$request->lastname;
 
-
             if ($ref == null) {
-                $ref = $this->database->getReference('dbAdmin/1')
-                ->set([
-                    "fullName" => $fullName,
-                    // "username" => $request->username,
-                    "email" => $request->email,
-                    "password" => $request->password,
-                    "admin_type" => $request->admin_type,
-                ]);
-
                 $email = $request->email;
                 $pass = $request->password;
                 try {
                     $this->auth->createUserWithEmailAndPassword($email, $pass);
+                    $ref = $this->database->getReference('dbAdmin/1')
+                    ->set([
+                        "fullName" => $fullName,
+                        // "username" => $request->username,
+                        "email" => $request->email,
+                        "password" => $request->password,
+                        "admin_type" => $request->admin_type,
+                    ]);
                 } catch (\Throwable $e) {
                     switch ($e->getMessage()) {
                         case 'The email address is already in use by another account.':
                             // dd("Email sudah digunakan.");
-                            return redirect('/register_form')->with('register-error','Email sudah digunakan.');
+                            return redirect('/add_admin')->with('register-error','Email sudah digunakan.');
                             break;
                         case 'A password must be a string with at least 6 characters.':
                             // dd("Kata sandi minimal 6 karakter.");
-                            return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
+                            return redirect('/add_admin')->with('register-error','Kata sandi minimal 6 karakter.');
                             break;
                         default:
                             // dd($e->getMessage());
-                            return redirect('/register_form')->with('register-error',$e->getMessage());
+                            return redirect('/add_admin')->with('register-error',$e->getMessage());
                             break;
                     }
                 }
             }
             
             else {
-                $ref = $this->database->getReference('dbAdmin/'.$autoIncrementID)
-                ->set([
-                    "fullName" => $fullName,
-                    // "username" => $request->username,
-                    "email" => $request->email,
-                    "password" => $request->password,
-                    "admin_type" => $request->admin_type,
-                ]);
-
                 $email = $request->email;
                 $pass = $request->password;
                 try {
                     $this->auth->createUserWithEmailAndPassword($email, $pass);
+                    $ref = $this->database->getReference('dbAdmin/'.$autoIncrementID)
+                    ->set([
+                        "fullName" => $fullName,
+                        // "username" => $request->username,
+                        "email" => $request->email,
+                        "password" => $request->password,
+                        "admin_type" => $request->admin_type,
+                    ]);
                 } catch (\Throwable $e) {
                     switch ($e->getMessage()) {
                         case 'The email address is already in use by another account.':
                             // dd("Email sudah digunakan.");
-                            return redirect('/register_form')->with('register-error','Email sudah digunakan.');
+                            return redirect('/add_admin')->with('register-error','Email sudah digunakan.');
                             break;
                         case 'A password must be a string with at least 6 characters.':
                             // dd("Kata sandi minimal 6 karakter.");
-                            return redirect('/register_form')->with('register-error','Kata sandi minimal 6 karakter.');
+                            return redirect('/add_admin')->with('register-error','Kata sandi minimal 6 karakter.');
                             break;
                         default:
                             // dd($e->getMessage());
-                            return redirect('/register_form')->with('register-error',$e->getMessage());
+                            return redirect('/add_admin')->with('register-error',$e->getMessage());
                             break;
                     }
                 }
             }
-            return redirect('/register_form')->with('pesan','Admin Berhasil ditambahkan');
+            return redirect('/add_admin')->with('pesan','Admin Berhasil ditambahkan');
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
@@ -469,6 +467,35 @@ class FirebaseController extends Controller
             // $ref = $this->database->getReference('hewan/karnivora/harimau')
             //     ->update(["benggala" => null]);
             return redirect('/show')->with('pesan','Data perusahaan berhasil dihapus');
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
+    }
+
+    public function delete_admin($id)
+    {
+        
+
+        if ($this->userCheck() == true){
+            // before
+            $ref = $this->database->getReference('dbAdmin/'.$id)->getValue();
+
+            $ref = $this->database->getReference('dbAdmin/'.$id.'/email')->getValue();
+            $userIdentifier = $ref;
+            $user = $this->auth->getUserByEmail($userIdentifier);
+            $userUid = $user->uid;
+
+            // Delete the user
+            $this->auth->deleteUser($userUid);
+
+            // remove()
+            $ref = $this->database->getReference('dbAdmin/'.$id)->remove();
+
+            // set(null)
+            $ref = $this->database->getReference('dbAdmin/'.$id)
+                ->set(null);
+            
+            return redirect('/show_admin')->with('pesan','Admin berhasil dihapus');
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }

@@ -25,10 +25,10 @@
                         <a class="nav-link {{ ($title === "register") ? 'active' : '' }}"
                         href="/add_admin">Add Admin</a>
                     </li>
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link {{ ($title === "show admin") ? 'active' : '' }}"
                         href="/show_admin">Show Admin</a>
-                    </li> --}}
+                    </li>
                 @else
                     
                 @endif

@@ -32,10 +32,10 @@
             <form class="needs-validation" method="POST" action="{{ route('login.submit') }}">
                 @csrf
                     <div class="form-group mb-3">
-                        <label class="form-label fw-bold" for="username">Username</label>
+                        <label class="form-label fw-bold" for="username">Email</label>
                         <input class="form-control" type="text" id="username" name="username" required>
                         <div class="invalid-feedback">
-                            Please enter your username
+                            Please enter your email
                         </div>
                     </div>
                     <div class="form-group mb-3">

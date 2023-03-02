@@ -64,10 +64,10 @@
                 <div class="form-group mb-3">
                     <label class="form-label fw-bold" for="admin_type">Admin Type</label>
                     <div>
-                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
+                        <input type="radio" class="btn-check" name="admin_type" id="option1" autocomplete="off" value="super_admin">
                         <label class="btn btn-outline-primary" for="option1">Super Admin</label>
 
-                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="admin_type" id="option2" autocomplete="off" value="admin" checked>
                         <label class="btn btn-outline-primary ms-2" for="option2">Admin</label>
                     </div>
                 </div>

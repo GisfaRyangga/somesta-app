@@ -47,8 +47,12 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 // });
 
 Route::get('/login', [SomestaController::class, 'tampil_login']);
+
 Route::get('/add_admin', [SomestaController::class, 'tampil_register']);
 Route::get('/show_admin', [FirebaseController::class, 'tampil_admin']);
+
+Route::get('/delete_admin/{id}', [FirebaseController::class, 'delete_admin'])->name('delete.admin');
+
 Route::get('/form', [SomestaController::class, 'tampil_form']);
 Route::post('/form/import_excel', [FirebaseController::class, 'import_excel']);
 Route::get('/form/export_excel', [FirebaseController::class, 'export_excel']);
