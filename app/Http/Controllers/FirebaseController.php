@@ -17,6 +17,7 @@ use Ramsey\Uuid\Type\Integer;
 
 
 use function JmesPath\search;
+use function PHPSTORM_META\type;
 
 class FirebaseController extends Controller
 {
@@ -192,6 +193,16 @@ class FirebaseController extends Controller
             $ref = $this->database->getReference('dbCustomer/')->getValue();
             $local_id = 1;
             return view('show', ['title' => 'show'], compact('ref','local_id'));
+        }else if($this->userCheck() == false){
+            return redirect('/login')->with('login-error',"Anda belum login.");
+        }
+    }
+
+    public function tampil_admin(){
+        if ($this->userCheck() == true){
+            $ref = $this->database->getReference('dbAdmin/')->getValue();
+            $local_id = 1;
+            return view('admins', ['title' => 'show admin'], compact('ref','local_id'));
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
         }
@@ -520,12 +531,7 @@ class FirebaseController extends Controller
     {
         $ref = $this->database->getReference('dbCustomer')->getValue();
         
-        // initiate auto increment function
-        $highest_id = 0;
-        foreach($ref as $nums=>$d){
-            $highest_id = $nums;
-        }
-        $autoIncrementID = $highest_id+1;
+
 
         
 
@@ -563,11 +569,18 @@ class FirebaseController extends Controller
         // 11 => "Pertamina Jawa Tengah"
         // ]
 
-        
+        // initiate auto increment function
+        $highest_id = 0;
+        foreach($ref as $nums=>$d){
+            $highest_id = $nums;
+        }
+        $autoIncrementID = $highest_id;
+
         foreach($importedPerusahaan as $structure=>$all){
             foreach($all as $data){
                 if ($data == !NULL){
                     if($data[0] != 'nama' && $data[0] != NULL){
+                        $autoIncrementID++;
                         if ($ref == null) {
                             //split coords
                             $splittedKoordinat = explode(',',$data[3]);
@@ -587,7 +600,6 @@ class FirebaseController extends Controller
                                 "penyalur" =>           $data[10],
                                 "layanan" =>            $data[11],
                             ]);
-                            dump($data);
                         }
                         else {
                             //split coords
@@ -608,7 +620,27 @@ class FirebaseController extends Controller
                                 "penyalur" =>           $data[10],
                                 "layanan" =>            $data[11],
                             ]);
+
                         }
+                        
+                        // $splittedKoordinat = explode(',',$data[3]);
+                        // dump(
+                        //     $data[0],
+                        //     $data[1],
+                        //     $data[2],
+                        //     floatval($splittedKoordinat[0]),
+                        //     floatval($splittedKoordinat[1]),
+                        //     $data[4],
+                        //     $data[5],
+                        //     $data[6],
+                        //     $data[7],
+                        //     $data[8],
+                        //     $data[9],
+                        //     $data[10],
+                        //     $data[11],
+                        //     "+++++++++++++++++++++++++++++",
+                        //     "+++++++++++++++++++++++++++++"
+                        // );
                     }
                 }
             }

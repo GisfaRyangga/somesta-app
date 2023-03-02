@@ -46,6 +46,18 @@ class SomestaController extends Controller
         }
     }
 
+    // public function tampil_admin(){
+    //     if ($this->userCheck() == true && Session::get('thisUserRole') == 'super_admin'){
+    //         return view('register', [
+    //             'title' => 'showadmin'
+    //         ]);
+    //     }else if($this->userCheck() == false){
+    //         return redirect('/login')->with('login-error',"Anda belum login.");
+    //     }else{
+    //         return redirect('/form')->with('access_violation','Anda tidak memiliki hak akses fitur ini');
+    //     }
+    // }
+
     public function tampil_show(){
         if ($this->userCheck() == true){
             return view('show', [
