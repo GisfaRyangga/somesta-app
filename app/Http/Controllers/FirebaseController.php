@@ -205,8 +205,9 @@ class FirebaseController extends Controller
     public function tampil_admin(){
         if ($this->userCheck() == true){
             $ref = $this->database->getReference('dbAdmin/')->getValue();
+            $user_email_now = $this->auth->getUserByEmail(Session::get('email'));
             $local_id = 1;
-            return view('admins', ['title' => 'show admin'], compact('ref','local_id'));
+            return view('admins', ['title' => 'show admin'], compact('ref','local_id','user_email_now'));
             // dump($ref);
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
@@ -488,20 +489,24 @@ class FirebaseController extends Controller
             $userIdentifier = $ref;
             $user = $this->auth->getUserByEmail($userIdentifier);
             $userUid = $user->uid;
+            
+            if (Session::get('firebaseUserId') && $userUid) {
+                dump("NOOOOOO");
+            }
 
             // Delete the user
-            $this->auth->deleteUser($userUid);
+            // $this->auth->deleteUser($userUid);
 
-            // remove()
-            $ref = $this->database->getReference('dbAdmin/'.$id)->remove();
+            // // remove()
+            // $ref = $this->database->getReference('dbAdmin/'.$id)->remove();
 
-            // set(null)
-            $ref = $this->database->getReference('dbAdmin/'.$id)
-                ->set(null);
+            // // set(null)
+            // $ref = $this->database->getReference('dbAdmin/'.$id)
+            //     ->set(null);
             
-            return redirect('/show_admin')->with('pesan','Admin berhasil dihapus');
+            // return redirect('/show_admin')->with('pesan','Admin berhasil dihapus');
         }else if($this->userCheck() == false){
-            return redirect('/login')->with('login-error',"Anda belum login.");
+            // return redirect('/login')->with('login-error',"Anda belum login.");
         }
     }
     
