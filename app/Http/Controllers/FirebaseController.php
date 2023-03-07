@@ -12,6 +12,7 @@ use Firebase\Auth\Token\Exception\InvalidToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use App\Models\Perusahaan;
 use App\Models\User;
+use Hamcrest\Core\IsNot;
 use Maatwebsite\Excel\Facades\Excel;
 use Ramsey\Uuid\Type\Integer;
 
@@ -69,29 +70,32 @@ class FirebaseController extends Controller
         $email = $request->username;
         $pass = $request->password;
 
+        // before
+        $ref = $this->database->getReference('dbAdmin')->getValue();
+            
         try {
-            $signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
             // dump($signInResult->data());
 
-            // before
-            $ref = $this->database->getReference('dbAdmin')->getValue();
             foreach($ref as $admin_id=>$data){
-                foreach($data as $current_admin=>$creds){
-                    if($current_admin == "email"){
-                        if ($creds == $email){
-                            if (array_search('super_admin',$data,true) == true){
-                                $this_user_role = "super_admin";
-                                Session::put('thisUserRole', $this_user_role);
-                            }elseif(array_search('admin',$data,true) == true){
-                                $this_user_role = "admin";
-                                Session::put('thisUserRole', $this_user_role);
+                if ($data != null) {
+                    foreach($data as $current_admin=>$creds){
+                        if($current_admin == "email"){
+                            if ($creds == $email){
+                                if (array_search('super_admin',$data,true) == true){
+                                    $this_user_role = "super_admin";
+                                    Session::put('thisUserRole', $this_user_role);
+                                }elseif(array_search('admin',$data,true) == true){
+                                    $this_user_role = "admin";
+                                    Session::put('thisUserRole', $this_user_role);
+                                }
+                                break;
                             }
-                            break;
                         }
                     }
                 }
             }
 
+            $signInResult = $this->auth->signInWithEmailAndPassword($email, $pass);
 
             Session::put('firebaseUserId', $signInResult->firebaseUserId());
             Session::put('idToken', $signInResult->idToken());
