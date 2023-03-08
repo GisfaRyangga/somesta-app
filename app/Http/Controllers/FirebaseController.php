@@ -635,7 +635,7 @@ class FirebaseController extends Controller
                                 "penyalur" =>           $data[10],
                                 "layanan" =>            $data[11],
                             ]);
-                            sleep(1);
+                            sleep(0.2);
                         }
                         else {
                             $highest_id = 0;
@@ -662,7 +662,7 @@ class FirebaseController extends Controller
                                 "penyalur" =>           $data[10],
                                 "layanan" =>            $data[11],
                             ]);
-                            sleep(1);
+                            sleep(0.2);
                         }
                         
                         // $splittedKoordinat = explode(',',$data[3]);

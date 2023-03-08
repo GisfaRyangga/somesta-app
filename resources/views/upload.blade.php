@@ -42,13 +42,29 @@
           <input id="file" class="form-control upload_excel" type="file" name="file" onchange="return fileValidation()" required="required">
           <label class="form-text mt-2">*Excel only</label>
           <div class="mt-2">
-            <button id="btn_upload" type="submit" class="btn btnmerah btn-primary w-100 mt-3 fw-bold btn_upload">
+            <button id="btn_upload" type="submit" class="btn btnmerah btn-primary w-100 mt-3 fw-bold btn_upload" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Kirim
             </button>
           </div>
         </form>
       </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" data-bs-backdrop="static"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-body">
+                <div class="container">
+                  <div class="row text-center ">
+                    <div class="loader mx-auto"></div>
+                    <h2>Mohon tunggu!</h2>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
   </div>
 
 @endsection
