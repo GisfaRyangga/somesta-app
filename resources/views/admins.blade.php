@@ -4,10 +4,6 @@
 
 <div class="container mt-4">
 
-    <div class="hover-text">hover me
-        <span class="tooltip-text" id="right">I'm a tooltip!</span>
-      </div>
-    
     <h2 class="text-center mb-3 fw-bold">ADMINS <div class="hover-text">ⓘ<span class="tooltip-text" id="right">Pastikan internet stabil saat menghapus admin!</span></div> </h2> 
     <div class="justify-content-center">
       @if (Session::has('pesan'))

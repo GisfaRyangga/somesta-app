@@ -80,6 +80,7 @@ Route::post('/login/submit', [FirebaseController::class, 'signIn'])->name('login
 Route::get('read', [FirebaseController::class, 'read']);
 // Route::get('update', [FirebaseController::class, 'update']);
 // Route::get('delete', [FirebaseController::class, 'delete']);
+Route::post('/deleteAll', [FirebaseController::class, 'deleteAll'])->name('delete_all');
 
 // Login Register Routes
 Route::get('/register', [FirebaseController::class, 'signUp']);

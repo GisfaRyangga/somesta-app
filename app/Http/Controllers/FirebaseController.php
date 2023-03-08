@@ -280,17 +280,13 @@ class FirebaseController extends Controller
             // before
             $ref = $this->database->getReference('dbCustomer')->getValue();
 
-            //initiate auto increment function
-            $highest_id = 0;
-            foreach($ref as $nums=>$d){
-                $highest_id = $nums;
-            }
-            $autoIncrementID = $highest_id+1;
+
 
             try {
                 //split coords
                 $splittedKoordinat = explode(',',$request->koordinat);
                 
+
             if ($ref == null) {
                 $ref = $this->database->getReference('dbCustomer/1')
                 ->set([
@@ -312,6 +308,12 @@ class FirebaseController extends Controller
             }
 
             else {
+                //initiate auto increment function
+                $highest_id = 0;
+                foreach($ref as $nums=>$d){
+                    $highest_id = $nums;
+                }
+                $autoIncrementID = $highest_id+1;
                 $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
                 ->set([
                     "nama" => $request->nama,
@@ -331,31 +333,6 @@ class FirebaseController extends Controller
                 // dump($autoIncrementID);
                 return redirect('/form')->with('pesan','Data Berhasil ditambahkan');
             }
-            // dump([
-            //         "nama" => $request->nama,
-            //         "group" => $request->group,
-            //         "status" => $request->status,
-            //         "koor_latitude" => floatval($splittedKoordinat[0]),
-            //         "koor_longitude" => floatval($splittedKoordinat[1]),
-            //         "lokasi" => $request->lokasi,
-            //         "kebutuhan" => $request->kebutuhan,
-            //         "market_share" => $request->market_share,
-            //         "jenis" => $request->jenis,
-            //         "tipe_customer" => $request->tipe_customer,
-            //         "kompetitor" => $request->kompetitor,
-            //         "penyalur" => $request->penyalur,
-            //         "layanan" => $request->layanan,
-            // ]);
-
-            
-            
-            // dump($ref);
-            // $ref = $this->database->getReference('dev/3')->getValue();
-            // dump($ref);
-
-            // after
-            // $ref = $this->database->getReference('dbCustomer/namaPerusahaan')->getValue();
-            // dump($ref);
             }
             
             catch(Exception $e) {
@@ -474,6 +451,28 @@ class FirebaseController extends Controller
             return redirect('/show')->with('pesan','Data perusahaan berhasil dihapus');
         }else if($this->userCheck() == false){
             return redirect('/login')->with('login-error',"Anda belum login.");
+        }
+    }
+
+    public function deleteAll(Request $request)
+    {
+        if ($this->userCheck() == true){
+            if ($request->deleteconfirmation == 'delete') {
+                            // before
+            $ref = $this->database->getReference('dbCustomer/')->getValue();
+
+            // remove()
+            $ref = $this->database->getReference('dbCustomer')->remove();
+
+            // set(null)
+            $ref = $this->database->getReference('dbCustomer')
+                ->set(null);
+                return redirect('/show')->with('pesan','Berhasil menghapus semua perusahaan');
+            }else{
+                return redirect('/show')->with('rejected','Salah kata kunci, gagal mengahpus perusahaan');
+            }
+        }else if($this->userCheck() == false){
+            // return redirect('/login')->with('login-error',"Anda belum login.");
         }
     }
 
