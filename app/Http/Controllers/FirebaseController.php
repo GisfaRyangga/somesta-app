@@ -566,10 +566,6 @@ class FirebaseController extends Controller
     {
         $ref = $this->database->getReference('dbCustomer')->getValue();
         
-
-
-        
-
         // validasi
 		$this->validate($request, [
 			'file' => 'required|mimes:csv,xls,xlsx'
@@ -604,18 +600,22 @@ class FirebaseController extends Controller
         // 11 => "Pertamina Jawa Tengah"
         // ]
 
-        // initiate auto increment function
-        $highest_id = 0;
-        foreach($ref as $nums=>$d){
-            $highest_id = $nums;
+        if ($ref == null) {
+            # code...
+        } else {
+            // initiate auto increment function
+            $highest_id = 0;
+            foreach($ref as $nums=>$d){
+                $highest_id = $nums;
+            }
+            $autoIncrementID = $highest_id;
         }
-        $autoIncrementID = $highest_id;
 
         foreach($importedPerusahaan as $structure=>$all){
             foreach($all as $data){
                 if ($data == !NULL){
                     if($data[0] != 'nama' && $data[0] != NULL){
-                        $autoIncrementID++;
+                        $ref = $this->database->getReference('dbCustomer')->getValue();
                         if ($ref == null) {
                             //split coords
                             $splittedKoordinat = explode(',',$data[3]);
@@ -635,8 +635,15 @@ class FirebaseController extends Controller
                                 "penyalur" =>           $data[10],
                                 "layanan" =>            $data[11],
                             ]);
+                            sleep(1);
                         }
                         else {
+                            $highest_id = 0;
+                            foreach($ref as $nums=>$d){
+                                $highest_id = $nums;
+                            }
+                            $autoIncrementID = $highest_id;
+                            $autoIncrementID++;
                             //split coords
                             $splittedKoordinat = explode(',',$data[3]);
                             $ref = $this->database->getReference('dbCustomer/'.$autoIncrementID)
@@ -655,7 +662,7 @@ class FirebaseController extends Controller
                                 "penyalur" =>           $data[10],
                                 "layanan" =>            $data[11],
                             ]);
-
+                            sleep(1);
                         }
                         
                         // $splittedKoordinat = explode(',',$data[3]);
