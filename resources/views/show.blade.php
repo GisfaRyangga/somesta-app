@@ -15,7 +15,13 @@
     @if ($ref==null)
     <h4 class="text-center mb-3">Data kosong</h4>
     @else
-    <a href="/form/export_excel" class="btn btndownload text-light mb-3 ms-0" target="_blank">EXPORT EXCEL</a>
+    <div class="d-flex justify-content-between">
+        <a href="/form/export_excel" class="btn btndownload text-light mb-3 ms-0" target="_blank">EXPORT EXCEL</a>
+        <div></div>
+        <button type="button" class="btn btn-danger text-light mb-3 ms-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Delete All
+        </button>
+    </div>
     <table class="table table-bordered kecil mt-3 w-100">
         <thead>
             <tr class="align-middle text-center">
@@ -74,11 +80,6 @@
             @endforeach
         </tbody>
     </table>
-    <div class="container mb-5">
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Delete All
-        </button>
-    </div>
     
     <form method="post" action="{{ route('delete_all') }}">
         @csrf
