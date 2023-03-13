@@ -15,6 +15,7 @@ use App\Models\User;
 use Hamcrest\Core\IsNot;
 use Maatwebsite\Excel\Facades\Excel;
 use Ramsey\Uuid\Type\Integer;
+use File;
 
 
 use function JmesPath\search;
@@ -687,9 +688,12 @@ class FirebaseController extends Controller
                 }
             }
         }
- 
-		// alihkan halaman kembali
-		return redirect('/uploadcsv')->with('pesan','Berhasil import data dari file');;
-    }
 
+        if(File::exists(public_path('/uploaded_file/'.$nama_file))){
+            File::delete(public_path('/uploaded_file/'.$nama_file));
+		    return redirect('/uploadcsv')->with('pesan','Berhasil import data dari file');
+        }else{
+		    return redirect('/uploadcsv')->with('pesan','Warning: Gagal menghapus temporary file hasil upload di server.');
+        }
+    }
 }
