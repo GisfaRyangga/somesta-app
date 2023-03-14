@@ -28,8 +28,8 @@ class FirebaseController extends Controller
     public function __construct()
     {
         $factory = (new Factory)
-        ->withServiceAccount(__DIR__.'/project-fbs-bf0e7-firebase-adminsdk-mflgt-4fd32b3d7d.json')
-        ->withDatabaseUri('https://project-fbs-bf0e7-default-rtdb.asia-southeast1.firebasedatabase.app/');
+        ->withServiceAccount(__DIR__.'/somesta-babc7-firebase-adminsdk-6ncww-bdc6af6c87.json')
+        ->withDatabaseUri('https://somesta-babc7-default-rtdb.asia-southeast1.firebasedatabase.app/');
 
         $this->auth = $factory->createAuth();
         $this->database = $factory->createDatabase();
@@ -491,20 +491,19 @@ class FirebaseController extends Controller
             $userUid = $user->uid;
             
             if (Session::get('firebaseUserId') && $userUid) {
-                dump("NOOOOOO");
+                // Delete the user
+                $this->auth->deleteUser($userUid);
+
+                // remove()
+                $ref = $this->database->getReference('dbAdmin/'.$id)->remove();
+
+                // set(null)
+                $ref = $this->database->getReference('dbAdmin/'.$id)
+                    ->set(null);
+                
+                return redirect('/show_admin')->with('pesan','Admin berhasil dihapus');
             }
 
-            // Delete the user
-            // $this->auth->deleteUser($userUid);
-
-            // // remove()
-            // $ref = $this->database->getReference('dbAdmin/'.$id)->remove();
-
-            // // set(null)
-            // $ref = $this->database->getReference('dbAdmin/'.$id)
-            //     ->set(null);
-            
-            // return redirect('/show_admin')->with('pesan','Admin berhasil dihapus');
         }else if($this->userCheck() == false){
             // return redirect('/login')->with('login-error',"Anda belum login.");
         }
@@ -688,7 +687,8 @@ class FirebaseController extends Controller
                 }
             }
         }
-
+        
+        //ignore IDE error. harusnya masih bisa jalan
         if(File::exists(public_path('/uploaded_file/'.$nama_file))){
             File::delete(public_path('/uploaded_file/'.$nama_file));
 		    return redirect('/uploadcsv')->with('pesan','Berhasil import data dari file');
