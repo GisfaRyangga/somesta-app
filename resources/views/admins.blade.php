@@ -39,7 +39,7 @@
                         <td>
                         <form action="{{ route('delete.admin',$data) }}" method="get">
                             @csrf
-                            <button class="btn-danger w-100 btn-aksi btnhapus" onclick="return confirm('Yakin menghapus admin ini?')">Hapus</button>
+                            <button class="btn-danger w-100 btn-aksi btnhapus" onclick="return confirm('Yakin menghapus admin ini?')" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus</button>
                         </form>
                         </td>
                     </tr>
@@ -49,6 +49,20 @@
             @endforeach
         </tbody>
     </table>
+    </div>
+    <div class="modal fade" id="exampleModal" data-bs-backdrop="static"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row text-center ">
+                      <div class="loader mx-auto"></div>
+                      <h2>Mohon tunggu!</h2>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
 
